@@ -24,7 +24,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 				</label>
 				<div className='flex'>
 					<input
-						className='px-1 sm:px-4 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
+						className='px-1 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
 						id={labelFor}
 						name={labelFor}
 						type={type}
@@ -83,7 +83,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 				{labelText}
 			</label>
 			<input
-				className='px-1 sm:px-4 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
+				className='px-1 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
 				id={labelFor}
 				name={labelFor}
 				type={inputType}

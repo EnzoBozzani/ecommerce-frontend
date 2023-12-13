@@ -4,18 +4,37 @@ import { FC, useEffect, useState } from 'react';
 import { InputGroup, Toast } from '..';
 import { Button } from '..';
 import { AdminService } from '@/src/services';
+import { useRouter } from 'next/navigation';
 
 export const AdminLoginDiv: FC = () => {
+	const router = useRouter();
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const handleClick = async () => {
+		if (email === '' || password === '') {
+			setErrorMessage('Preencha todos os campos!');
+			setIsErrorAlertOpen(true);
+			setTimeout(() => {
+				setIsErrorAlertOpen(false);
+			}, 3 * 1000);
+			return;
+		}
 		const res = await AdminService.login(email, password);
 		if (res.message) {
 			setErrorMessage(res.message);
 			setIsErrorAlertOpen(true);
+			setTimeout(() => {
+				setIsErrorAlertOpen(false);
+			}, 3 * 1000);
+		}
+
+		if (res.authenticated) {
+			sessionStorage.setItem('ecommerce-token', res.token);
+			router.push('/admin');
 		}
 	};
 
@@ -52,17 +71,18 @@ export const AdminLoginDiv: FC = () => {
 					setValue={setPassword}
 					value={password}
 				/>
-				<Button
-					buttonText='Login'
-					handleClick={handleClick}
-				/>
-				{isErrorAlertOpen && (
+				<div className='flex flex-col gap-4'>
+					<Button
+						buttonText='Login'
+						handleClick={handleClick}
+					/>
 					<Toast
+						isOpen={isErrorAlertOpen}
 						setIsOpen={setIsErrorAlertOpen}
 						text={errorMessage}
 						type='error'
 					/>
-				)}
+				</div>
 			</div>
 		</div>
 	);

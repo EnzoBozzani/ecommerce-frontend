@@ -3,13 +3,16 @@ import { FC, Dispatch, SetStateAction } from 'react';
 interface Props {
 	text: string;
 	type: 'success' | 'error' | 'normal';
+	isOpen: boolean;
 	setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Toast: FC<Props> = ({ text, type, setIsOpen }) => {
+export const Toast: FC<Props> = ({ text, type, setIsOpen, isOpen }) => {
 	return (
 		<div
-			className={`w-64 md:w-72 flex justify-between items-center rounded p-4 ${
+			className={`${
+				isOpen ? 'visible' : 'invisible'
+			} w-64 md:w-72 flex justify-between items-center rounded px-4 py-2 ${
 				type === 'success' ? 'bg-green' : type === 'error' ? 'bg-red-500' : 'bg-neutral-500'
 			}`}
 		>
@@ -21,7 +24,7 @@ export const Toast: FC<Props> = ({ text, type, setIsOpen }) => {
 				viewBox='0 0 24 24'
 				strokeWidth={1.5}
 				stroke='currentColor'
-				className='w-6 h-6 hover:cursor-pointer'
+				className='w-8 h-8 hover:cursor-pointer'
 			>
 				<path
 					strokeLinecap='round'
