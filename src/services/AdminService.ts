@@ -17,4 +17,22 @@ export default class AdminService {
 
 		return content;
 	}
+
+	static async getAllProducts() {
+		const token = sessionStorage.getItem('ecommerce-token');
+
+		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/products`, {
+			method: 'GET',
+			headers: {
+				// prettier-ignore
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		const content = await res.json();
+
+		return content;
+	}
 }
