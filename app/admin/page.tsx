@@ -1,21 +1,29 @@
 'use client';
 
-import { Table } from '@/src/components';
+import { Logo, Table } from '@/src/components';
 import { AdminService } from '@/src/services';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
+const classes = {
+	navLink:
+		'text-white/25 text-lg pb-2 border-b-2 border-b-primary hover:border-b-sec hover:text-light transition duration-200 cursor-pointer',
+};
 
 export default function AdminHome() {
 	const router = useRouter();
 	const [data, setData] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	if (!sessionStorage.getItem('ecommerce-token')) router.push('/admin/login');
-
 	useEffect(() => {
 		const fetchUsers = async () => {
 			setIsLoading(true);
-			const { products, total } = await AdminService.getAllProducts();
+			if (!sessionStorage.getItem('ecommerce-token')) {
+				setIsLoading(false);
+				return router.push('/admin/login');
+			}
+			setIsLoading(true);
+			const { products } = await AdminService.getAllProducts();
 			setData(products);
 			setIsLoading(false);
 		};
@@ -26,19 +34,21 @@ export default function AdminHome() {
 	if (isLoading) return <div></div>;
 
 	return (
-		<main className='bg-black w-full flex h-screen'>
-			<div className='flex flex-col items-center gap-72 bg-dark h-full p-12'>
-				<div>Logo</div>
+		<main className='bg-black w-full flex min-h-screen'>
+			<div className='flex flex-col items-center gap-36 bg-dark min-h-screen p-12'>
 				<div>
-					<div className='text-light text-lg'>Usuários</div>
-					<div className='text-light text-lg'>Produtos</div>
-					<div className='text-light text-lg'>Compras</div>
+					<Logo className='h-24 w-24 text-primary' />
+				</div>
+				<div className='flex flex-col gap-8'>
+					<div className={classes.navLink}>Usuários</div>
+					<div className={classes.navLink}>Produtos</div>
+					<div className={classes.navLink}>Compras</div>
 				</div>
 			</div>
-			<div className='flex justify-center items-center'>
+			<div className='w-full flex justify-center items-center'>
 				<Table
 					data={data}
-					headers={['osn', 'sioms', '3', '4', '5', '6', '7']}
+					headers={['ID', 'Nome', 'Descrição', 'Preço', 'Em Destaque', 'Em Estoque', 'N. de Favoritos']}
 				/>
 			</div>
 		</main>
