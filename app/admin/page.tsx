@@ -1,14 +1,9 @@
 'use client';
 
-import { Logo, Table } from '@/src/components';
+import { AdminNav, Table } from '@/src/components';
 import { AdminService } from '@/src/services';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
-const classes = {
-	navLink:
-		'text-white/25 text-lg pb-2 border-b-2 border-b-primary hover:border-b-sec hover:text-light transition duration-200 cursor-pointer',
-};
 
 interface Data {
 	data: any[];
@@ -18,7 +13,7 @@ interface Data {
 
 export default function AdminHome() {
 	const router = useRouter();
-	const [selected, setSelected] = useState<'Produtos' | 'Usuários' | 'Compras'>('Produtos');
+	const [selected, setSelected] = useState<'Produtos' | 'Usuários' | 'Compras'>('Usuários');
 	const [data, setData] = useState<Data>({ data: [], total: 0, headers: [''] });
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -92,31 +87,10 @@ export default function AdminHome() {
 
 	return (
 		<main className='bg-black w-full flex min-h-screen'>
-			<div className='flex flex-col items-center gap-36 bg-dark min-h-screen p-12'>
-				<div>
-					<Logo className='h-24 w-24 text-primary' />
-				</div>
-				<div className='flex flex-col gap-12'>
-					<div
-						className={classes.navLink}
-						onClick={() => setSelected('Usuários')}
-					>
-						Usuários
-					</div>
-					<div
-						className={classes.navLink}
-						onClick={() => setSelected('Produtos')}
-					>
-						Produtos
-					</div>
-					<div
-						className={classes.navLink}
-						onClick={() => setSelected('Compras')}
-					>
-						Compras
-					</div>
-				</div>
-			</div>
+			<AdminNav
+				selected={selected}
+				setSelected={setSelected}
+			/>
 			<section className='w-full min-h-screen flex flex-col items-center gap-12 pt-24'>
 				<section className='flex flex-col justify-center items-center'>
 					<h1 className='text-6xl text-sec font-bold'>Tabela de {selected}</h1>
