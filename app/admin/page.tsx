@@ -10,9 +10,14 @@ const classes = {
 		'text-white/25 text-lg pb-2 border-b-2 border-b-primary hover:border-b-sec hover:text-light transition duration-200 cursor-pointer',
 };
 
+interface Data {
+	data: any[];
+	total: number;
+}
+
 export default function AdminHome() {
 	const router = useRouter();
-	const [data, setData] = useState<any[]>([]);
+	const [data, setData] = useState<Data>({ data: [], total: 0 });
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -23,8 +28,8 @@ export default function AdminHome() {
 				return router.push('/admin/login');
 			}
 			setIsLoading(true);
-			const { products } = await AdminService.getAllProducts();
-			setData(products);
+			const { products, total } = await AdminService.getAllProducts();
+			setData({ data: products, total });
 			setIsLoading(false);
 		};
 
@@ -39,18 +44,32 @@ export default function AdminHome() {
 				<div>
 					<Logo className='h-24 w-24 text-primary' />
 				</div>
-				<div className='flex flex-col gap-8'>
+				<div className='flex flex-col gap-12'>
 					<div className={classes.navLink}>Usuários</div>
 					<div className={classes.navLink}>Produtos</div>
 					<div className={classes.navLink}>Compras</div>
 				</div>
 			</div>
-			<div className='w-full flex justify-center items-center'>
+			<section className='w-full min-h-screen flex flex-col items-center gap-12 pt-24'>
+				<section className='flex flex-col justify-center items-center'>
+					<h1 className='text-6xl text-sec font-bold'>Tabela de Produtos</h1>
+					<h6 className='text-lg text-white/40'>(Total: {data.total})</h6>
+				</section>
 				<Table
-					data={data}
-					headers={['ID', 'Nome', 'Descrição', 'Preço', 'Em Destaque', 'Em Estoque', 'N. de Favoritos']}
+					data={data.data}
+					headers={[
+						'ID',
+						'Nome',
+						'Descrição',
+						'Preço',
+						'Em Destaque',
+						'Em Estoque',
+						'N. de Favoritos',
+						'Editar/Remover',
+					]}
+					lastColumn
 				/>
-			</div>
+			</section>
 		</main>
 	);
 }

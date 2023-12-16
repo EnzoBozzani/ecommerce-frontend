@@ -35,4 +35,23 @@ export default class AdminService {
 
 		return content;
 	}
+
+	static async removeProductByID(productId: number) {
+		const token = sessionStorage.getItem('ecommerce-token');
+
+		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/products`, {
+			method: 'DELETE',
+			headers: {
+				// prettier-ignore
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({ productId }),
+		});
+
+		const content = await res.json();
+
+		return content;
+	}
 }
