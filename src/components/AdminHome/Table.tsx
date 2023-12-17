@@ -13,7 +13,7 @@ export const Table: FC<Props> = ({ data, headers, lastColumn }) => {
 	const len = headers.length;
 	return (
 		<div className='w-full overflow-x-auto p-12'>
-			<div className='inline-block text-white min-w-full'>
+			<div className='inline-block text-light min-w-full'>
 				<div
 					className='w-full flex flex-col max-h-[44rem] overflow-y-scroll'
 					style={{ minWidth: `${len * 150}px` }}
