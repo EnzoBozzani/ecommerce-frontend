@@ -1,90 +1,13 @@
 'use client';
 
-import { AdminNav, Table } from '@/src/components';
-import { AdminService } from '@/src/services';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { AdminNav, Table, Loader } from '@/src/components';
+import { useSelectData } from '@/src/hooks/useSelectData';
+import { NextPage } from 'next';
 
-interface Data {
-	data: any[];
-	total: number;
-	headers: string[];
-}
+const AdminHome: NextPage = () => {
+	const { data, isLoading, isNavOpen, selected, setIsNavOpen, setSelected } = useSelectData();
 
-export default function AdminHome() {
-	const router = useRouter();
-	const [selected, setSelected] = useState<'Produtos' | 'Usuários' | 'Compras'>('Usuários');
-	const [data, setData] = useState<Data>({ data: [], total: 0, headers: [''] });
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [isNavOpen, setIsNavOpen] = useState(false);
-
-	useEffect(() => {
-		const fetchUsers = async () => {
-			setIsLoading(true);
-			if (!sessionStorage.getItem('ecommerce-token')) {
-				setIsLoading(false);
-				return router.push('/admin/login');
-			}
-			setIsLoading(true);
-			if (selected === 'Produtos') {
-				const { products, total } = await AdminService.getAllProducts();
-				setData({
-					data: products,
-					total,
-					headers: [
-						'ID',
-						'Nome',
-						'Descrição',
-						'Preço',
-						'Em Destaque',
-						'Em Estoque',
-						'N. de Favoritos',
-						'Editar/Remover',
-					],
-				});
-			}
-			if (selected === 'Usuários') {
-				const { users, total } = await AdminService.getAllUsers();
-				const formattedUsers = users.map((user: any) => ({
-					id: user.id,
-					name: user.firstName + ' ' + user.lastName,
-					phone: user.phone,
-					email: user.email,
-				}));
-				setData({ data: formattedUsers, total, headers: ['ID', 'Nome', 'Telefone', 'Email'] });
-			}
-			if (selected === 'Compras') {
-				const { purchases, total } = await AdminService.getAllPurchases();
-				const formattedPurchases = purchases.map((purchase: any) => ({
-					id: purchase.id,
-					userId: purchase.userId,
-					productId: purchase.productId,
-					status: purchase.status,
-					amount: purchase.amount / 100,
-					productName: purchase.Product.name,
-					userEmail: purchase.User.email,
-				}));
-				setData({
-					data: formattedPurchases,
-					total,
-					headers: [
-						'ID',
-						'ID do Usuário',
-						'ID do Produto',
-						'Status',
-						'Pagamento',
-						'Nome do Produto',
-						'Email do Usuário',
-					],
-				});
-			}
-			setIsLoading(false);
-		};
-
-		fetchUsers();
-	}, [selected]);
-
-	if (isLoading) return <div></div>;
+	if (isLoading) return <Loader />;
 
 	return (
 		<main className='bg-black w-full flex min-h-screen'>
@@ -117,7 +40,7 @@ export default function AdminHome() {
 			</svg>
 			<section className={`fixed top-0 left-0 w-full min-h-screen flex flex-col items-center gap-12 pt-24`}>
 				<section className='flex flex-col justify-center items-center'>
-					<h1 className='text-2xl md:text-6xl text-primary font-bold'>Tabela de {selected}</h1>
+					<h1 className='text-2xl md:text-6xl text-gradient font-bold'>Tabela de {selected}</h1>
 					<h6 className='text-lg text-primaryLight'>(Total: {data.total})</h6>
 				</section>
 				<Table
@@ -128,4 +51,6 @@ export default function AdminHome() {
 			</section>
 		</main>
 	);
-}
+};
+
+export default AdminHome;
