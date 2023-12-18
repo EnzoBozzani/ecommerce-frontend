@@ -15,7 +15,7 @@ export const Table: FC<Props> = ({ data, headers, lastColumn }) => {
 		<div className='w-full overflow-x-auto p-12'>
 			<div className='inline-block text-light min-w-full'>
 				<div
-					className='w-full flex flex-col max-h-[44rem] overflow-y-scroll'
+					className='w-full flex flex-col max-h-[490px] overflow-y-scroll'
 					style={{ minWidth: `${len * 150}px` }}
 				>
 					<span className='w-full flex min-h-[5rem] font-semibold sticky top-0 z-10 bg-dark'>

@@ -90,4 +90,23 @@ export default class AdminService {
 
 		return content;
 	}
+
+	static async addProduct(formData: FormData) {
+		const token = sessionStorage.getItem('ecommerce-token');
+
+		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/products`, {
+			method: 'POST',
+			headers: {
+				// prettier-ignore
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: formData,
+		});
+
+		const content = await res.json();
+
+		return content;
+	}
 }

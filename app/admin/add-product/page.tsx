@@ -1,6 +1,7 @@
 'use client';
 
 import { InputGroup, FileInput, SelectInput, Button, Toast } from '@/src/components';
+import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 
 export default function AdminAddProduct() {
@@ -43,6 +44,22 @@ export default function AdminAddProduct() {
 
 	return (
 		<main className='min-w-full min-h-full bg-gradient-to-b from-black to-dark py-24'>
+			<Link href={'/admin'}>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					fill='none'
+					viewBox='0 0 24 24'
+					strokeWidth={1.5}
+					stroke='currentColor'
+					className='w-12 h-12 fixed top-4 left-4 text-light'
+				>
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						d='M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3'
+					/>
+				</svg>
+			</Link>
 			<form
 				encType='multipart/form-data'
 				className='flex flex-col items-center gap-16 max-w-[1000px] bg-dark mx-auto rounded-2xl py-24'
