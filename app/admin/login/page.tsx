@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default async function AdminLogin() {
 	return (
-		<main className='flex justify-center items-center w-full h-screen bg-black'>
+		<main className='flex justify-center items-center w-full h-screen bg-gradient-to-b from-black to-dark'>
 			<AdminLoginDiv />
 		</main>
 	);

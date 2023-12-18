@@ -38,7 +38,7 @@ const AdminHome: NextPage = () => {
 					d='M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5'
 				/>
 			</svg>
-			<section className={`fixed top-0 left-0 w-full min-h-screen flex flex-col items-center gap-12 pt-24`}>
+			<section className='bg-gradient-to-b from-black to-dark fixed top-0 left-0 w-full min-h-screen flex flex-col items-center gap-12 pt-24'>
 				<section className='flex flex-col justify-center items-center'>
 					<h1 className='text-2xl md:text-6xl text-gradient font-bold'>Tabela de {selected}</h1>
 					<h6 className='text-lg text-primaryLight'>(Total: {data.total})</h6>

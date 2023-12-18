@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { InputGroup, Toast } from '..';
 import { Button } from '..';
 import { AdminService } from '@/src/services';
