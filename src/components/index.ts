@@ -6,5 +6,6 @@ import { Table } from './AdminHome/Table';
 import { Logo } from './common/Logo';
 import { AdminNav } from './AdminHome/AdminNav';
 import { Loader } from './common/Loader';
+import { FileInput } from './common/FileInput';
 
-export { InputGroup, AdminLoginDiv, Button, Toast, Table, Logo, AdminNav, Loader };
+export { InputGroup, AdminLoginDiv, Button, Toast, Table, Logo, AdminNav, Loader, FileInput };

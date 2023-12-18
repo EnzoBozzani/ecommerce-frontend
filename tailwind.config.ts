@@ -9,7 +9,7 @@ const config: Config = {
 				primary: '#531D82',
 				primaryLight: '#7A2DBD',
 				sec: '#2EEEB1',
-				light: '#ECECEC',
+				light: '#EBEBEB',
 				black: '#000',
 			},
 		},
