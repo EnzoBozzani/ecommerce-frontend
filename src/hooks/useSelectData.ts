@@ -10,7 +10,7 @@ interface Data {
 
 export const useSelectData = () => {
 	const router = useRouter();
-	const [selected, setSelected] = useState<'Produtos' | 'Usuários' | 'Compras'>('Usuários');
+	const [selected, setSelected] = useState<'Produtos' | 'Usuários' | 'Compras'>('Produtos');
 	const [data, setData] = useState<Data>({ data: [], total: 0, headers: [''] });
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isNavOpen, setIsNavOpen] = useState(false);
@@ -29,16 +29,7 @@ export const useSelectData = () => {
 				setData({
 					data: products,
 					total,
-					headers: [
-						'ID',
-						'Nome',
-						'Descrição',
-						'Preço',
-						'Em Destaque',
-						'Em Estoque',
-						'N. de Favoritos',
-						'Editar/Remover',
-					],
+					headers: ['ID', 'Nome', 'Preço', 'Em Destaque', 'Em Estoque', 'N. de Favoritos', 'Editar/Remover'],
 				});
 				setIsLoading(false);
 				return;

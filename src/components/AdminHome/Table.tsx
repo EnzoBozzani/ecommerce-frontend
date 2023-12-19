@@ -74,6 +74,8 @@ export const Table: FC<Props> = ({ data, headers, lastColumn }) => {
 												/>
 											</svg>
 										)
+									) : value.length > 20 ? (
+										`${value.slice(0, 20)}...`
 									) : (
 										value
 									)}
@@ -113,7 +115,7 @@ export const Table: FC<Props> = ({ data, headers, lastColumn }) => {
 											if (conf) {
 												const { message } = await AdminService.removeProductByID(d.id);
 												alert(message);
-												router.refresh();
+												location.reload();
 											}
 										}}
 									>

@@ -97,9 +97,8 @@ export default class AdminService {
 		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/products`, {
 			method: 'POST',
 			headers: {
-				// prettier-ignore
+				//prettier-ignore
 				'Accept': 'application/json',
-				'Content-Type': 'application/json',
 				Authorization: `Bearer ${token}`,
 			},
 			body: formData,

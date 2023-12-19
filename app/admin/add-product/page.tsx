@@ -1,10 +1,13 @@
 'use client';
 
 import { InputGroup, FileInput, SelectInput, Button, Toast } from '@/src/components';
+import { AdminService } from '@/src/services';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
 export default function AdminAddProduct() {
+	const router = useRouter();
 	const [name, setName] = useState('');
 	const [desc, setDesc] = useState('');
 	const [files, setFiles] = useState<[File | null, File | null, File | null]>([null, null, null]);
@@ -13,6 +16,7 @@ export default function AdminAddProduct() {
 	const [featured, setFeatured] = useState<string>('false');
 	const [isToastOpen, setIsToastOpen] = useState(false);
 	const [toastText, setToastText] = useState('');
+	const [toastType, setToastType] = useState<'error' | 'success' | 'normal'>('error');
 
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
@@ -20,13 +24,15 @@ export default function AdminAddProduct() {
 		if (name === '' || desc === '' || files[0] === null || price === '' || inStock === '') {
 			setToastText('Todos os campos são obrigatórios!');
 			setIsToastOpen(true);
+			setToastType('error');
 			setTimeout(() => setIsToastOpen(false), 3000);
 			return;
 		}
 
-		if (Number.isNaN(price) || Number.isNaN(inStock) || Number(price) <= 0 || Number(inStock) <= 0) {
-			setToastText('Preço e Em Estoque devem ser números positivos maiores que 0!');
+		if (Number.isNaN(+price) || Number.isNaN(+inStock) || Number(price) <= 0 || Number(inStock) <= 0) {
+			setToastText('Preço e Em Estoque devem ser números positivos maiores que 0');
 			setIsToastOpen(true);
+			setToastType('error');
 			setTimeout(() => setIsToastOpen(false), 3000);
 			return;
 		}
@@ -40,6 +46,24 @@ export default function AdminAddProduct() {
 		formData.append('images', files[0]);
 		files[1] && formData.append('images', files[1]);
 		files[2] && formData.append('images', files[2]);
+
+		const res = await AdminService.addProduct(formData);
+
+		if (res.message) {
+			setToastText(res.message);
+			setIsToastOpen(true);
+			setToastType('error');
+			setTimeout(() => setIsToastOpen(false), 3000);
+			return;
+		}
+
+		setToastText('Produto adicionado com sucesso!');
+		setIsToastOpen(true);
+		setToastType('success');
+		setTimeout(() => {
+			setIsToastOpen(false);
+			router.push('/admin');
+		}, 1500);
 	};
 
 	return (
@@ -62,7 +86,7 @@ export default function AdminAddProduct() {
 			</Link>
 			<form
 				encType='multipart/form-data'
-				className='flex flex-col items-center gap-16 max-w-[1000px] bg-dark mx-auto rounded-2xl py-24'
+				className='flex flex-col items-center gap-16 max-w-[1000px] bg-dark mx-auto rounded-2xl pt-24 pb-4'
 				onSubmit={handleSubmit}
 			>
 				<h3 className='text-xl md:text-4xl font-semibold text-light'>Adicionar Novo Produto</h3>
@@ -135,7 +159,7 @@ export default function AdminAddProduct() {
 					<Toast
 						isOpen={isToastOpen}
 						setIsOpen={setIsToastOpen}
-						type='error'
+						type={toastType}
 						text={toastText}
 					/>
 				</div>
