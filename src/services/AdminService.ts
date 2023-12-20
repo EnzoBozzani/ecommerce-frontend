@@ -108,4 +108,22 @@ export default class AdminService {
 
 		return content;
 	}
+
+	static async editProduct(formData: FormData) {
+		const token = sessionStorage.getItem('ecommerce-token');
+
+		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/products`, {
+			method: 'PUT',
+			headers: {
+				//prettier-ignore
+				'Accept': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: formData,
+		});
+
+		const content = await res.json();
+
+		return content;
+	}
 }

@@ -2,8 +2,8 @@
 
 import { AdminService } from '@/src/services';
 import { useRouter } from 'next/navigation';
-import { FC, FormEvent, useState } from 'react';
-import { Button, FileInput, InputGroup, SelectInput, Toast } from '..';
+import { FC, FormEvent, useState, useEffect } from 'react';
+import { Button, FileInput, InputGroup, Loader, SelectInput, Toast } from '..';
 
 export const AdminAddProductForm: FC = () => {
 	const router = useRouter();
@@ -16,8 +16,14 @@ export const AdminAddProductForm: FC = () => {
 	const [isToastOpen, setIsToastOpen] = useState(false);
 	const [toastText, setToastText] = useState('');
 	const [toastType, setToastType] = useState<'error' | 'success' | 'normal'>('error');
+	const [isLoading, setIsLoading] = useState(true);
 
-	if (!sessionStorage.getItem('ecommerce-token')) useRouter().push('/admin/login');
+	useEffect(() => {
+		if (!sessionStorage.getItem('ecommerce-token')) router.push('/admin/login');
+		setIsLoading(false);
+	}, []);
+
+	if (isLoading) return <Loader />;
 
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
@@ -66,6 +72,7 @@ export const AdminAddProductForm: FC = () => {
 			router.push('/admin');
 		}, 1500);
 	};
+
 	return (
 		<form
 			encType='multipart/form-data'

@@ -1,7 +1,48 @@
-import { AdminAddProductForm } from '@/src/components';
-import Link from 'next/link';
+'use client';
 
-export default async function AdminEditProduct() {
+import { AdminEditProductForm, Loader } from '@/src/components';
+import { ProductsService } from '@/src/services';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+interface Params {
+	params: {
+		id: string;
+	};
+}
+
+export interface Product {
+	id: number;
+	name: string;
+	description: string;
+	price: number;
+	images: [File | null, File | null, File | null];
+	num_favorites?: number;
+	in_stock: number;
+	featured: boolean;
+	createdAt?: Date;
+	updatedAt?: Date;
+}
+
+function AdminEditProduct({ params }: Params) {
+	const router = useRouter();
+	const [product, setProduct] = useState<Product>();
+	const [isLoading, setIsLoading] = useState(true);
+	const id = params.id;
+
+	useEffect(() => {
+		const fetchProduct = async () => {
+			if (!sessionStorage.getItem('ecommerce-token')) return router.push('/admin');
+			const prod: Product = await ProductsService.getProductByID(+id);
+			setProduct(prod);
+			setIsLoading(false);
+		};
+		fetchProduct();
+	}, []);
+
+	if (isLoading) return <Loader />;
+
 	return (
 		<main className='min-w-full min-h-full bg-gradient-to-b from-black to-dark py-24'>
 			<Link href={'/admin'}>
@@ -20,7 +61,9 @@ export default async function AdminEditProduct() {
 					/>
 				</svg>
 			</Link>
-			<AdminAddProductForm />
+			<AdminEditProductForm product={product} />
 		</main>
 	);
 }
+
+export default AdminEditProduct;

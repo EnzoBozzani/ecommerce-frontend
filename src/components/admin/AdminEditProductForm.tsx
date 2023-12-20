@@ -3,43 +3,21 @@
 import { AdminService } from '@/src/services';
 import { FC, FormEvent, useState } from 'react';
 import { Button, FileInput, InputGroup, SelectInput, Toast } from '..';
+import { Product } from '@/app/admin/[id]/page';
+import { useRouter } from 'next/navigation';
 
 interface Props {
-	startName: string;
-	startDesc: string;
-	startFiles: [File | null, File | null, File | null];
-	startPrice: string;
-	startInStock: string;
-	startFeatured: string;
+	product: Product | undefined;
 }
 
-interface Product {
-	id: number;
-	name: string;
-	description: string;
-	price: number;
-	images: string[];
-	num_favorites?: number;
-	in_stock: number;
-	featured?: boolean;
-	createdAt?: Date;
-	updatedAt?: Date;
-}
-
-export const AdminAddEditForm: FC<Props> = ({
-	startName,
-	startDesc,
-	startFiles,
-	startPrice,
-	startInStock,
-	startFeatured,
-}) => {
-	const [name, setName] = useState(startName);
-	const [desc, setDesc] = useState(startDesc);
-	const [files, setFiles] = useState<[File | null, File | null, File | null]>(startFiles);
-	const [price, setPrice] = useState(startPrice);
-	const [inStock, setInStock] = useState(startInStock);
-	const [featured, setFeatured] = useState<string>(startFeatured);
+export const AdminEditProductForm: FC<Props> = ({ product }) => {
+	const router = useRouter();
+	const [name, setName] = useState(product!.name);
+	const [desc, setDesc] = useState(product!.description);
+	const [files, setFiles] = useState<[File | null, File | null, File | null]>([null, null, null]);
+	const [price, setPrice] = useState(product!.price.toString());
+	const [inStock, setInStock] = useState(product!.in_stock.toString());
+	const [featured, setFeatured] = useState<string>(product!.featured ? 'true' : 'false');
 	const [isToastOpen, setIsToastOpen] = useState(false);
 	const [toastText, setToastText] = useState('');
 	const [toastType, setToastType] = useState<'error' | 'success' | 'normal'>('error');
@@ -47,7 +25,7 @@ export const AdminAddEditForm: FC<Props> = ({
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 
-		if (name === '' || desc === '' || files[0] === null || price === '' || inStock === '') {
+		if (name === '' || desc === '' || price === '' || inStock === '') {
 			setToastText('Todos os campos são obrigatórios!');
 			setIsToastOpen(true);
 			setToastType('error');
@@ -64,16 +42,17 @@ export const AdminAddEditForm: FC<Props> = ({
 		}
 
 		const formData = new FormData();
-		name !== startName && formData.append('name', name);
-		desc !== startDesc && formData.append('description', desc);
-		price !== startPrice && formData.append('price', price);
-		inStock !== startInStock && formData.append('in_stock', inStock);
-		featured !== startFeatured && formData.append('featured', featured);
+		formData.append('productId', product!.id.toString());
+		name !== product!.name && formData.append('name', name);
+		desc !== product!.description && formData.append('description', desc);
+		price !== product!.price.toString() && formData.append('price', price);
+		inStock !== product!.in_stock.toString() && formData.append('in_stock', inStock);
+		featured !== (product!.featured ? 'true' : 'false') && formData.append('featured', featured);
 		files[0] && formData.append('images', files[0]);
 		files[1] && formData.append('images', files[1]);
 		files[2] && formData.append('images', files[2]);
 
-		const res = await AdminService.addProduct(formData);
+		const res = await AdminService.editProduct(formData);
 
 		if (res.message) {
 			setToastText(res.message);
@@ -83,12 +62,12 @@ export const AdminAddEditForm: FC<Props> = ({
 			return;
 		}
 
-		setToastText('Produto adicionado com sucesso!');
+		setToastText('Produto editado com sucesso!');
 		setIsToastOpen(true);
 		setToastType('success');
 		setTimeout(() => {
 			setIsToastOpen(false);
-			location.reload();
+			router.push('/admin');
 		}, 1500);
 	};
 	return (

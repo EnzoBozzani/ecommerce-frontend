@@ -95,7 +95,7 @@ export const Table: FC<Props> = ({ data, headers, lastColumn }) => {
 										strokeWidth={1.5}
 										stroke='currentColor'
 										className='w-12 h-12 text-blue-500 rounded-full hover:bg-transparent/10 p-2 cursor-pointer'
-										onClick={() => router.push(`/admin/products/${d.id}`)}
+										onClick={() => router.push(`/admin/${d.id}`)}
 									>
 										<path
 											strokeLinecap='round'

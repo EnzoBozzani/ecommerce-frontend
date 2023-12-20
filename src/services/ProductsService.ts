@@ -16,4 +16,12 @@ export default class ProductsService {
 		);
 		return res.json();
 	}
+
+	static async getProductByID(productId: number) {
+		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/products/${productId}`);
+
+		const content = await res.json();
+
+		return content;
+	}
 }

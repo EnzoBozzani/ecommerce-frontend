@@ -17,7 +17,7 @@ export const SelectInput: FC<Props> = ({ value, setValue }) => {
 			<select
 				name='featured'
 				id='featured'
-				defaultValue='false'
+				defaultValue={value}
 				onChange={(ev) => setValue(ev.currentTarget.value)}
 			>
 				<option value='false'>Não</option>

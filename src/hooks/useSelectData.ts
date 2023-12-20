@@ -12,17 +12,14 @@ export const useSelectData = () => {
 	const router = useRouter();
 	const [selected, setSelected] = useState<'Produtos' | 'Usuários' | 'Compras'>('Produtos');
 	const [data, setData] = useState<Data>({ data: [], total: 0, headers: [''] });
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [isNavOpen, setIsNavOpen] = useState(false);
 
 	useEffect(() => {
 		const fetchUsers = async () => {
-			setIsLoading(true);
 			if (!sessionStorage.getItem('ecommerce-token')) {
-				setIsLoading(false);
 				return router.push('/admin/login');
 			}
-			setIsLoading(true);
 			if (selected === 'Produtos') {
 				const { products, total } = await AdminService.getAllProducts();
 				setData({
