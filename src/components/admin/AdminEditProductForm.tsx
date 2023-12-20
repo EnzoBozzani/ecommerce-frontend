@@ -1,23 +1,48 @@
 'use client';
 
 import { AdminService } from '@/src/services';
-import { useRouter } from 'next/navigation';
 import { FC, FormEvent, useState } from 'react';
 import { Button, FileInput, InputGroup, SelectInput, Toast } from '..';
 
-export const AdminAddProductForm: FC = () => {
-	const router = useRouter();
-	const [name, setName] = useState('');
-	const [desc, setDesc] = useState('');
-	const [files, setFiles] = useState<[File | null, File | null, File | null]>([null, null, null]);
-	const [price, setPrice] = useState('');
-	const [inStock, setInStock] = useState('');
-	const [featured, setFeatured] = useState<string>('false');
+interface Props {
+	startName: string;
+	startDesc: string;
+	startFiles: [File | null, File | null, File | null];
+	startPrice: string;
+	startInStock: string;
+	startFeatured: string;
+}
+
+interface Product {
+	id: number;
+	name: string;
+	description: string;
+	price: number;
+	images: string[];
+	num_favorites?: number;
+	in_stock: number;
+	featured?: boolean;
+	createdAt?: Date;
+	updatedAt?: Date;
+}
+
+export const AdminAddEditForm: FC<Props> = ({
+	startName,
+	startDesc,
+	startFiles,
+	startPrice,
+	startInStock,
+	startFeatured,
+}) => {
+	const [name, setName] = useState(startName);
+	const [desc, setDesc] = useState(startDesc);
+	const [files, setFiles] = useState<[File | null, File | null, File | null]>(startFiles);
+	const [price, setPrice] = useState(startPrice);
+	const [inStock, setInStock] = useState(startInStock);
+	const [featured, setFeatured] = useState<string>(startFeatured);
 	const [isToastOpen, setIsToastOpen] = useState(false);
 	const [toastText, setToastText] = useState('');
 	const [toastType, setToastType] = useState<'error' | 'success' | 'normal'>('error');
-
-	if (!sessionStorage.getItem('ecommerce-token')) useRouter().push('/admin/login');
 
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
@@ -39,12 +64,12 @@ export const AdminAddProductForm: FC = () => {
 		}
 
 		const formData = new FormData();
-		formData.append('name', name);
-		formData.append('description', desc);
-		formData.append('price', price);
-		formData.append('in_stock', inStock);
-		formData.append('featured', featured);
-		formData.append('images', files[0]);
+		name !== startName && formData.append('name', name);
+		desc !== startDesc && formData.append('description', desc);
+		price !== startPrice && formData.append('price', price);
+		inStock !== startInStock && formData.append('in_stock', inStock);
+		featured !== startFeatured && formData.append('featured', featured);
+		files[0] && formData.append('images', files[0]);
 		files[1] && formData.append('images', files[1]);
 		files[2] && formData.append('images', files[2]);
 
@@ -63,7 +88,7 @@ export const AdminAddProductForm: FC = () => {
 		setToastType('success');
 		setTimeout(() => {
 			setIsToastOpen(false);
-			router.push('/admin');
+			location.reload();
 		}, 1500);
 	};
 	return (

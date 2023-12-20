@@ -24,8 +24,7 @@ export const useSelectData = () => {
 			}
 			setIsLoading(true);
 			if (selected === 'Produtos') {
-				const { products, total, message } = await AdminService.getAllProducts();
-				if (message) throw new Error(message);
+				const { products, total } = await AdminService.getAllProducts();
 				setData({
 					data: products,
 					total,
@@ -35,8 +34,7 @@ export const useSelectData = () => {
 				return;
 			}
 			if (selected === 'Usuários') {
-				const { users, total, message } = await AdminService.getAllUsers();
-				if (message) throw new Error(message);
+				const { users, total } = await AdminService.getAllUsers();
 				const formattedUsers = users.map((user: any) => ({
 					id: user.id,
 					name: `${user.firstName} ${user.lastName}`,
@@ -48,8 +46,7 @@ export const useSelectData = () => {
 				return;
 			}
 			if (selected === 'Compras') {
-				const { purchases, total, message } = await AdminService.getAllPurchases();
-				if (message) throw new Error(message);
+				const { purchases, total } = await AdminService.getAllPurchases();
 				const formattedPurchases = purchases.map((purchase: any) => ({
 					id: purchase.id,
 					userId: purchase.userId,
