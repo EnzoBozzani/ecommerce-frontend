@@ -12,10 +12,10 @@ export const Table: FC<Props> = ({ data, headers, lastColumn }) => {
 	const router = useRouter();
 	const len = headers.length;
 	return (
-		<div className='w-full overflow-x-auto p-12'>
-			<div className='inline-block text-light min-w-full'>
+		<div className='w-full'>
+			<div className='overflow-auto m-8'>
 				<div
-					className='w-full flex flex-col max-h-[490px] overflow-y-scroll'
+					className='text-light flex flex-col max-h-[500px] w-full overflow-y-scroll'
 					style={{ minWidth: `${len * 150}px` }}
 				>
 					<span className='w-full flex min-h-[5rem] font-semibold sticky top-0 z-10 bg-dark'>

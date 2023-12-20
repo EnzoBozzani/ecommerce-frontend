@@ -7,7 +7,7 @@ interface Props {
 
 export const SelectInput: FC<Props> = ({ value, setValue }) => {
 	return (
-		<div className='flex flex-col gap-6'>
+		<div className='flex flex-col gap-6 w-[115px]'>
 			<label
 				className='text-light font-bold'
 				htmlFor='featured'

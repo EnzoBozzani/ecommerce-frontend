@@ -10,7 +10,7 @@ interface Props {
 
 export const FileInput: FC<Props> = ({ labelFor, labelText, filesArrayIndex, filesArray, setFilesArray }) => {
 	return (
-		<div className='flex flex-col gap-2'>
+		<div className='flex flex-col gap-2 w-2/3 sm:w-auto'>
 			<label
 				className='text-light font-bold'
 				htmlFor={labelFor}
@@ -24,6 +24,7 @@ export const FileInput: FC<Props> = ({ labelFor, labelText, filesArrayIndex, fil
 					setFilesArray((prevFiles) => {
 						if (ev.target.files) {
 							const file = ev.target.files[0];
+							console.log(ev.target.files[0]);
 							return [
 								filesArrayIndex === 0 ? file : prevFiles[0],
 								filesArrayIndex === 1 ? file : prevFiles[1],

@@ -13,7 +13,7 @@ export const Toast: FC<Props> = ({ text, type, setIsOpen, isOpen }) => {
 			className={`${
 				isOpen ? 'visible' : 'invisible'
 			} w-64 md:w-72 flex justify-between items-center rounded px-4 py-2 ${
-				type === 'success' ? 'bg-green' : type === 'error' ? 'bg-red-500' : 'bg-neutral-500'
+				type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-neutral-500'
 			}`}
 		>
 			<p className='text-dark'>{text}</p>
