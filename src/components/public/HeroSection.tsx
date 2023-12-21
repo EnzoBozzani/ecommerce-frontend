@@ -12,15 +12,18 @@ export const HeroSection: FC = () => {
 				</div>
 			</div>
 			<div className='w-full pt-12 flex flex-col items-center justify-center gap-4'>
-				<h1 className='text-light text-2xl sm:text-4xl font-bold text-center w-2/3'>
+				<h1 className='text-light text-2xl sm:text-4xl font-bold text-center w-11/12 md:w-2/3'>
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, repellat.
 				</h1>
-				<h5 className='text-dark text-center w-2/3'>
+				<h5 className='text-dark text-center w-11/12 md:w-2/3'>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ab quam, numquam et tenetur vero
 					molestiae dolorem accusantium assumenda porro?
 				</h5>
-				<Link href={'/register'}>
-					<button className='personalizedButton text-light mt-12 font-bold'>Faça Parte</button>
+				<Link
+					href={'/register'}
+					className='bg-dark shadowEffect rounded border border-black px-8 py-2 mt-12'
+				>
+					<button className='text-gradient font-bold uppercase'>Faça Parte</button>
 				</Link>
 			</div>
 		</section>

@@ -1,12 +1,10 @@
-import { ProductsService } from '@/src/services/';
-import { HeroSection } from '@/src/components/public/HeroSection';
+import { HeroSection, ProductsSection } from '@/src/components/';
 
-export default async function Home() {
-	const { products, page, perPage, total } = await ProductsService.getFeaturedProducts();
-
+export default function Home() {
 	return (
 		<main className='w-full min-h-screen bg-dark pt-12'>
 			<HeroSection />
+			<ProductsSection />
 		</main>
 	);
 }

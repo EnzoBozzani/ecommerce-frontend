@@ -10,6 +10,8 @@ import { FileInput } from './common/FileInput';
 import { SelectInput } from './common/SelectInput';
 import { AdminAddProductForm } from './admin/AdminAddProductForm';
 import { AdminEditProductForm } from './admin/AdminEditProductForm';
+import { HeroSection } from './public/HeroSection';
+import { ProductsSection } from './public/ProductsSection';
 
 export {
 	InputGroup,
@@ -24,4 +26,6 @@ export {
 	SelectInput,
 	AdminAddProductForm,
 	AdminEditProductForm,
+	HeroSection,
+	ProductsSection,
 };
