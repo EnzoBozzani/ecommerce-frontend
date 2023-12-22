@@ -14,6 +14,10 @@ export const ProductCard: FC<Props> = ({ product }) => {
 				src={`http://${product.images[0]}`}
 				height={100}
 				width={100}
+				style={{
+					height: 'auto',
+					width: 'auto',
+				}}
 			/>
 			<p>{product.name}</p>
 		</div>

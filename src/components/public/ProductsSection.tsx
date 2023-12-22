@@ -4,7 +4,7 @@ import { Product } from '@/app/admin/[id]/page';
 import { ProductsService } from '@/src/services';
 import { useRouter } from 'next/navigation';
 import { FC, FormEvent, useEffect, useState } from 'react';
-import { Loader, ProductCard } from '..';
+import { Dropdown, Loader, ProductCard } from '..';
 
 interface ProductsList {
 	products: Product[];
@@ -20,6 +20,7 @@ export const ProductsSection: FC = () => {
 	const [param, setParam] = useState<'num_favorites' | 'price'>('price');
 	const [order, setOrder] = useState<'ASC' | 'DESC'>('ASC');
 	const [isLoading, setIsLoading] = useState(true);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -33,6 +34,7 @@ export const ProductsSection: FC = () => {
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 		setIsLoading(true);
+		if (name === '') return setIsLoading(false);
 		const res = await ProductsService.getProducts({ name, order, param });
 		setProductsList(res);
 		setIsLoading(false);
@@ -48,7 +50,7 @@ export const ProductsSection: FC = () => {
 					<div className='flex'>
 						<input
 							type='text'
-							className='peer border-light border-e-0 focus:border-primaryLight focus:outline-none text-white border w-full h-12 px-6 bg-black transition duration-200'
+							className='peer border-light border-e-0 focus:border-primaryLight focus:outline-none text-white border w-full h-12 ps-6 bg-black transition duration-200'
 							placeholder='Buscar Produtos'
 							value={name}
 							onChange={(ev) => setName(ev.currentTarget.value)}
@@ -75,12 +77,14 @@ export const ProductsSection: FC = () => {
 					</div>
 					<button type='button'>
 						<svg
+							onMouseEnter={() => setIsDropdownOpen(true)}
+							onMouseLeave={() => setIsDropdownOpen(false)}
 							xmlns='http://www.w3.org/2000/svg'
 							fill='none'
 							viewBox='0 0 24 24'
 							strokeWidth={1.5}
 							stroke='currentColor'
-							className='w-11 h-11 ms-4 text-light hover:text-primaryLight'
+							className={`w-11 h-11 ms-4 ${isDropdownOpen ? 'text-primaryLight' : 'text-light'}`}
 						>
 							<path
 								strokeLinecap='round'
@@ -90,24 +94,42 @@ export const ProductsSection: FC = () => {
 						</svg>
 					</button>
 				</form>
-				<button>
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						fill='none'
-						viewBox='0 0 24 24'
-						strokeWidth={1.5}
-						stroke='currentColor'
-						className='w-14 h-14 text-primaryLight'
-					>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							d='M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
-						/>
-					</svg>
-				</button>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					fill='none'
+					viewBox='0 0 24 24'
+					strokeWidth={1.5}
+					stroke='currentColor'
+					className='w-14 h-14 text-primaryLight'
+				>
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						d='M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
+					/>
+				</svg>
 			</div>
-			{isLoading ? <Loader /> : productsList?.products?.map((prod) => <ProductCard product={prod} />)}
+			{isDropdownOpen && (
+				<Dropdown
+					order={order}
+					param={param}
+					setOrder={setOrder}
+					setParam={setParam}
+					setIsDropdownOpen={setIsDropdownOpen}
+				/>
+			)}
+			{isLoading ? (
+				<Loader />
+			) : productsList?.total === 0 ? (
+				<p>nenhum</p>
+			) : (
+				productsList?.products?.map((prod) => (
+					<ProductCard
+						key={prod.id}
+						product={prod}
+					/>
+				))
+			)}
 		</section>
 	);
 };
