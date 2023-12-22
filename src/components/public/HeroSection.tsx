@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export const HeroSection: FC = () => {
 	return (
-		<section className='w-11/12 bg-primary flex flex-col p-8 mx-auto max-w-[1200px]'>
+		<section className='bg-primary flex flex-col p-8 mx-auto max-w-[1600px]'>
 			<div className='w-full flex'>
 				<div className='flex gap-4 items-center'>
 					<Logo className='w-12 h-12 text-light' />

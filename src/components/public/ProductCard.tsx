@@ -8,18 +8,15 @@ interface Props {
 
 export const ProductCard: FC<Props> = ({ product }) => {
 	return (
-		<div>
+		<div className='flex w-full bg-black rounded-xl p-12 text-light'>
 			<Image
 				alt={`${product.name} image1`}
 				src={`http://${product.images[0]}`}
-				height={100}
-				width={100}
-				style={{
-					height: 'auto',
-					width: 'auto',
-				}}
+				height={200}
+				width={200}
+				className='h-[250px] w-auto'
 			/>
-			<p>{product.name}</p>
+			<h3>{product.name}</h3>
 		</div>
 	);
 };

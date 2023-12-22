@@ -15,7 +15,7 @@ export const Dropdown: FC<Props> = ({ order, param, setOrder, setParam, setIsDro
 		<div
 			onMouseEnter={() => setIsDropdownOpen(true)}
 			onMouseLeave={() => setIsDropdownOpen(false)}
-			className='rounded-xl bg-black text-light flex flex-col w-48 absolute z-50 ms-[21rem] mt-12'
+			className='rounded-xl bg-dark text-light flex flex-col w-48 absolute z-50 ms-[12rem] md:ms-[28rem] mt-12'
 		>
 			<h2 className='w-full text-center text-light/50 py-1 cursor-default'>
 				Ordenar por <br />({param === 'price' ? 'Preço' : 'Nº De Favoritos'}{' '}

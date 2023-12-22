@@ -14,6 +14,10 @@
 	-webkit-text-fill-color: transparent;
 }
 
+.hero-to-products-gradient {
+	background: linear-gradient(to bottom, #531d82 0%, #1a1a1a 10%);
+}
+
 /* código do loader */
 .loader {
 	transform: rotateZ(45deg);
