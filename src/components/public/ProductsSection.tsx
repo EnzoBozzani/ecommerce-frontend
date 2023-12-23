@@ -4,7 +4,7 @@ import { Product } from '@/app/admin/[id]/page';
 import { ProductsService } from '@/src/services';
 import { useRouter } from 'next/navigation';
 import { FC, FormEvent, useEffect, useState } from 'react';
-import { Dropdown, Loader, ProductCard } from '..';
+import { SearchDropdown, Loader, ProductCard } from '..';
 
 interface ProductsList {
 	products: Product[];
@@ -20,7 +20,7 @@ export const ProductsSection: FC = () => {
 	const [param, setParam] = useState<'num_favorites' | 'price'>('price');
 	const [order, setOrder] = useState<'ASC' | 'DESC'>('ASC');
 	const [isLoading, setIsLoading] = useState(true);
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false);
 	const [title, setTitle] = useState('Em Destaque');
 
 	useEffect(() => {
@@ -45,10 +45,10 @@ export const ProductsSection: FC = () => {
 
 	return (
 		<section className='hero-to-products-gradient p-8 flex flex-col py-12 mx-auto max-w-[1600px]'>
-			<div className='w-full flex items-center justify-between'>
+			<div className='w-full flex items-center'>
 				<form
 					onSubmit={handleSubmit}
-					className='flex items-center w-[250px] md:w-[500px]'
+					className='flex items-center w-full md:w-[500px]'
 				>
 					<div className='flex w-full'>
 						<input
@@ -80,14 +80,14 @@ export const ProductsSection: FC = () => {
 					</div>
 					<button type='button'>
 						<svg
-							onMouseEnter={() => setIsDropdownOpen(true)}
-							onMouseLeave={() => setIsDropdownOpen(false)}
+							onMouseEnter={() => setIsSearchDropdownOpen(true)}
+							onMouseLeave={() => setIsSearchDropdownOpen(false)}
 							xmlns='http://www.w3.org/2000/svg'
 							fill='none'
 							viewBox='0 0 24 24'
 							strokeWidth={1.5}
 							stroke='currentColor'
-							className={`w-11 h-11 ms-4 ${isDropdownOpen ? 'text-sec' : 'text-light'}`}
+							className={`w-11 h-11 ms-4 ${isSearchDropdownOpen ? 'text-sec' : 'text-light'}`}
 						>
 							<path
 								strokeLinecap='round'
@@ -97,32 +97,18 @@ export const ProductsSection: FC = () => {
 						</svg>
 					</button>
 				</form>
-				<svg
-					xmlns='http://www.w3.org/2000/svg'
-					fill='none'
-					viewBox='0 0 24 24'
-					strokeWidth={1.5}
-					stroke='currentColor'
-					className='w-14 h-14 text-light'
-				>
-					<path
-						strokeLinecap='round'
-						strokeLinejoin='round'
-						d='M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
-					/>
-				</svg>
 			</div>
-			{isDropdownOpen && (
-				<Dropdown
+			{isSearchDropdownOpen && (
+				<SearchDropdown
 					order={order}
 					param={param}
 					setOrder={setOrder}
 					setParam={setParam}
-					setIsDropdownOpen={setIsDropdownOpen}
+					setIsDropdownOpen={setIsSearchDropdownOpen}
 				/>
 			)}
 			<div className='flex flex-col gap-12 py-12'>
-				<h1 className='ms-2 sm:ms-6 md:ms-12 text-xl sm:text-2xl md:text-4xl lg:text-6xl text-light text-bold'>
+				<h1 className='ms-2 sm:ms-6 md:ms-12 text-xl sm:text-2xl md:text-4xl lg:text-6xl text-gradient font-bold'>
 					Produtos {title}
 				</h1>
 				{isLoading ? (

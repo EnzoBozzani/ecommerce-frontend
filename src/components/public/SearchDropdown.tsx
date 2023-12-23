@@ -10,12 +10,12 @@ interface Props {
 	setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Dropdown: FC<Props> = ({ order, param, setOrder, setParam, setIsDropdownOpen }) => {
+export const SearchDropdown: FC<Props> = ({ order, param, setOrder, setParam, setIsDropdownOpen }) => {
 	return (
 		<div
 			onMouseEnter={() => setIsDropdownOpen(true)}
 			onMouseLeave={() => setIsDropdownOpen(false)}
-			className='rounded-xl bg-dark text-light flex flex-col w-48 absolute z-50 ms-[12rem] md:ms-[28rem] mt-12'
+			className='rounded-xl bg-dark text-light flex flex-col w-48 absolute z-50 right-0 md:right-auto md:ms-[28rem] mt-10'
 		>
 			<h2 className='w-full text-center text-light/50 py-1 cursor-default'>
 				Ordenar por <br />({param === 'price' ? 'Preço' : 'Nº De Favoritos'}{' '}

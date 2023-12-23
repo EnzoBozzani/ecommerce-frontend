@@ -13,7 +13,7 @@ import { AdminEditProductForm } from './admin/AdminEditProductForm';
 import { HeroSection } from './public/HeroSection';
 import { ProductsSection } from './public/ProductsSection';
 import { ProductCard } from './public/ProductCard';
-import { Dropdown } from './public/Dropdown';
+import { SearchDropdown } from './public/SearchDropdown';
 
 export {
 	InputGroup,
@@ -31,5 +31,5 @@ export {
 	HeroSection,
 	ProductsSection,
 	ProductCard,
-	Dropdown,
+	SearchDropdown,
 };
