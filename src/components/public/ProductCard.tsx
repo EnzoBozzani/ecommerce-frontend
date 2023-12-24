@@ -43,7 +43,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
 						strokeWidth={1.5}
 						stroke='currentColor'
 						className={`w-10 h-10 ${
-							!isLiked ? 'text-light hover:text-light/50' : 'text-yellow-300 hover:text-yellow-300/50'
+							!isLiked ? 'text-light hover:text-yellow-300/50' : 'text-yellow-300 hover:text-light/50'
 						}`}
 					>
 						<path

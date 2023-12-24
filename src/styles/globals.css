@@ -9,13 +9,17 @@
 }
 
 .text-gradient {
-	background: -webkit-linear-gradient(60deg, #531d82, #2eeeb1);
+	background: -webkit-linear-gradient(60deg, #5c307f, #f56f0f);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 
 .hero-to-products-gradient {
-	background: linear-gradient(to bottom, #531d82 0%, #1a1a1a 10%);
+	background: linear-gradient(to bottom, #5c307f 0%, #1a1a1a 10%);
+}
+
+.shadowEffect {
+	box-shadow: 0 0 20px 1px #f56f0f;
 }
 
 /* código do loader */
@@ -25,7 +29,7 @@
 	border-radius: 50%;
 	width: 88px;
 	height: 88px;
-	color: #fff;
+	color: #f56f0f;
 }
 .loader:before,
 .loader:after {
@@ -90,8 +94,4 @@
 	87% {
 		box-shadow: 0.2em -0.2em 0 0 currentcolor;
 	}
-}
-
-.shadowEffect {
-	box-shadow: 0 0 20px 1px #2eeeb1;
 }
