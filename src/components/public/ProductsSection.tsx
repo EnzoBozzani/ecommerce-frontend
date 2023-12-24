@@ -114,7 +114,9 @@ export const ProductsSection: FC = () => {
 				{isLoading ? (
 					<Loader />
 				) : productsList?.total === 0 ? (
-					<p>nenhum</p>
+					<article className='w-full bg-black rounded-lg flex justify-center items-center py-16'>
+						<h3 className='text-light font-bold italic text-2xl'>Nenhum produto encontrado :(</h3>
+					</article>
 				) : (
 					productsList?.products?.map((prod) => (
 						<ProductCard
