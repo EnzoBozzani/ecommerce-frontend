@@ -18,7 +18,7 @@ export const Table: FC<Props> = ({ data, headers, lastColumn }) => {
 					className='text-light flex flex-col max-h-[500px] w-full overflow-y-scroll'
 					style={{ minWidth: `${len * 150}px` }}
 				>
-					<span className='w-full flex min-h-[5rem] font-semibold sticky top-0 z-10 bg-dark'>
+					<span className='w-full flex min-h-[5rem] font-semibold sticky top-0 z-10 bg-black'>
 						{headers.map((header) => (
 							<span
 								style={{ width: `${100 / len}%` }}

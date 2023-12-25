@@ -10,7 +10,7 @@ const AdminHome: NextPage = () => {
 	if (isLoading) return <Loader />;
 
 	return (
-		<main className='bg-black w-full flex min-h-screen'>
+		<main className='bg-dark w-full flex min-h-screen'>
 			{isNavOpen && (
 				<div
 					className='fixed inset-0 bg-black opacity-50 z-40'
@@ -38,9 +38,9 @@ const AdminHome: NextPage = () => {
 					d='M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5'
 				/>
 			</svg>
-			<section className='bg-gradient-to-b min-h-screen from-black to-dark fixed top-0 left-0 w-full flex flex-col items-center py-24'>
+			<section className='bg-dark min-h-screen fixed top-0 left-0 w-full flex flex-col items-center py-24'>
 				<section className='flex flex-col justify-center items-center'>
-					<h1 className='text-2xl md:text-6xl text-gradient font-bold'>Tabela de {selected}</h1>
+					<h1 className='text-2xl md:text-6xl text-light'>Tabela de {selected}</h1>
 					<h6 className='text-lg text-primaryLight'>(Total: {data.total})</h6>
 				</section>
 				<Table

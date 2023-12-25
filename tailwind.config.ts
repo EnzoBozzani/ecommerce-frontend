@@ -5,11 +5,12 @@ const config: Config = {
 	theme: {
 		extend: {
 			colors: {
-				dark: '#1A1A1A',
+				dark: '#262626',
 				primary: '#5C307F',
 				primaryLight: '#7A2DBD',
 				sec: '#FF8100',
 				light: '#EBEBEB',
+				lightGray: '#0000001a',
 				black: '#000',
 			},
 		},

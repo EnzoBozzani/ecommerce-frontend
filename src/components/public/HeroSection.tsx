@@ -45,10 +45,12 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 	};
 
 	return (
-		<section className='bg-primary flex flex-col p-8 mx-auto max-w-[1600px]'>
-			<div className='w-full flex items-center justify-between'>
+		<section className='bg-light flex flex-col mx-auto max-w-[1600px]'>
+			<div className='border-b border-b-dark/20 w-full flex items-center justify-between px-8 py-4'>
 				<div className='flex gap-4 items-center'>
-					<Logo className='w-12 h-12 text-light' />
+					<button onClick={() => location.reload()}>
+						<Logo className='w-12 h-12 text-primaryLight' />
+					</button>
 					<form
 						onSubmit={handleSubmit}
 						className='flex items-center w-full md:w-[500px]'
@@ -56,14 +58,14 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 						<div className='flex w-full'>
 							<input
 								type='text'
-								className='peer border-light border-e-0 focus:border-sec focus:outline-none text-white border w-full h-12 ps-6 bg-black transition duration-200'
+								className='peer rounded-l-xl border border-dark/20 border-e-0 focus:border-primaryLight focus:border-2 focus:outline-none text-dark w-full h-12 ps-6 bg-light transition duration-200'
 								placeholder='Buscar Produtos'
 								value={name}
 								onChange={(ev) => setName(ev.currentTarget.value)}
 							/>
 							<button
 								type='submit'
-								className='border border-s-0 peer-focus:border-sec h-12 bg-black px-4 flex justify-center items-center transition duration-200'
+								className='border rounded-r-xl border-dark/20 border peer-focus:border-primaryLight peer-focus:border-2 peer-focus:border-s-0 t h-12 bg-light px-4 flex justify-center items-center transition duration-200'
 							>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
@@ -71,7 +73,7 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 									viewBox='0 0 24 24'
 									strokeWidth={1.5}
 									stroke='currentColor'
-									className='w-8 h-8 text-white'
+									className='w-8 h-8 text-dark'
 								>
 									<path
 										strokeLinecap='round'
@@ -81,16 +83,22 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 								</svg>
 							</button>
 						</div>
-						<button type='button'>
+						<button
+							type='button'
+							className={`flex items-center gap-2 ms-4 ${
+								isSearchDropdownOpen ? 'text-sec' : 'text-dark'
+							}`}
+							onMouseEnter={() => setIsSearchDropdownOpen(true)}
+							onMouseLeave={() => setIsSearchDropdownOpen(false)}
+						>
+							<p className='text-xl'>Ordenar</p>
 							<svg
-								onMouseEnter={() => setIsSearchDropdownOpen(true)}
-								onMouseLeave={() => setIsSearchDropdownOpen(false)}
 								xmlns='http://www.w3.org/2000/svg'
 								fill='none'
 								viewBox='0 0 24 24'
 								strokeWidth={1.5}
 								stroke='currentColor'
-								className={`w-11 h-11 ms-4 ${isSearchDropdownOpen ? 'text-sec' : 'text-light'}`}
+								className={`w-8 h-8`}
 							>
 								<path
 									strokeLinecap='round'
@@ -112,9 +120,9 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 				)}
 				<Link
 					href={'/login'}
-					className='flex gap-4 items-center group'
+					className='flex gap-2 items-center group rounded-lg border-2 border-dark/20 px-4 py-2 hover:border-primaryLight'
 				>
-					<h6 className='text-lg sm:text-xl text-light group-hover:text-sec'>
+					<h6 className='text-lg sm:text-xl text-dark/50 group-hover:text-dark'>
 						{!user?.firstName ? 'Entrar' : `Bem vindo, ${user?.firstName}!`}
 					</h6>
 					<svg
@@ -123,7 +131,7 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 						viewBox='0 0 24 24'
 						strokeWidth={1.5}
 						stroke='currentColor'
-						className='w-14 h-14 text-light group-hover:text-sec'
+						className='w-10 h-10 text-dark/50 group-hover:text-dark'
 					>
 						<path
 							strokeLinecap='round'
@@ -133,17 +141,17 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 					</svg>
 				</Link>
 			</div>
-			<div className='w-full pt-12 flex flex-col items-center justify-center gap-4'>
+			<div className='bg-primary p-12 flex flex-col items-center justify-center gap-4 m-4'>
 				<h1 className='text-light text-2xl sm:text-4xl font-bold text-center w-11/12 md:w-2/3'>
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, repellat.
 				</h1>
-				<h5 className='text-dark text-center w-11/12 md:w-2/3'>
+				<h5 className='text-sec text-center w-11/12 md:w-2/3'>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ab quam, numquam et tenetur vero
 					molestiae dolorem accusantium assumenda porro?
 				</h5>
 				<Link
 					href={'/register'}
-					className='bg-dark shadowEffect rounded border border-black px-8 py-2 mt-12'
+					className='bg-dark shadowEffect rounded border border-black px-8 py-2'
 				>
 					<button className='text-gradient font-bold uppercase'>Faça Parte</button>
 				</Link>

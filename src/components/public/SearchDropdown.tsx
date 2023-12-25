@@ -15,27 +15,27 @@ export const SearchDropdown: FC<Props> = ({ order, param, setOrder, setParam, se
 		<div
 			onMouseEnter={() => setIsDropdownOpen(true)}
 			onMouseLeave={() => setIsDropdownOpen(false)}
-			className='rounded-xl bg-dark text-light flex flex-col w-48 absolute top-20 z-50 right-0 md:right-auto md:ms-[32rem]'
+			className='rounded-xl bg-dark text-light flex flex-col w-48 absolute top-[60px] z-50 right-0 md:right-auto md:ms-[28rem]'
 		>
 			<h2 className='w-full text-center text-light/50 py-1 cursor-default'>
 				Ordenar por <br />({param === 'price' ? 'Preço' : 'Nº De Favoritos'}{' '}
 				{order === 'ASC' ? 'Crescente' : 'Decrescente'}):
 			</h2>
 			<button
-				className='w-full py-4 text-lg hover:bg-primary'
+				className='w-full py-4 text-lg hover:bg-sec'
 				onClick={() => setParam('price')}
 			>
 				Por Preço
 			</button>
 			<button
-				className='w-full py-4 text-lg hover:bg-primary'
+				className='w-full py-4 text-lg hover:bg-sec'
 				onClick={() => setParam('num_favorites')}
 			>
 				Por Número de Favoritos
 			</button>
 			<button
 				onClick={() => setOrder((current) => (current === 'ASC' ? 'DESC' : 'ASC'))}
-				className='rounded-b-xl w-full py-4 text-lg flex justify-center items-center gap-2 hover:bg-primary'
+				className='rounded-b-xl w-full py-4 text-lg flex justify-center items-center gap-2 hover:bg-sec'
 			>
 				{order === 'ASC' ? 'Crescente' : 'Decrescente'}
 				<svg

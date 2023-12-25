@@ -10,7 +10,7 @@ export default function Home() {
 	const [title, setTitle] = useState('Em Destaque');
 
 	return (
-		<main className='w-full min-h-screen bg-dark'>
+		<main className='w-full min-h-screen bg-light'>
 			<HeroSection
 				setIsLoading={setIsLoading}
 				setProductsList={setProductsList}
@@ -21,6 +21,9 @@ export default function Home() {
 				productsList={productsList}
 				title={title}
 			/>
+			<footer className='w-full border-t border-t-dark/20 flex justify-center items-center py-12'>
+				conteudo do footer
+			</footer>
 		</main>
 	);
 }
