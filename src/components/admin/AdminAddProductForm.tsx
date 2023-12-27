@@ -19,7 +19,7 @@ export const AdminAddProductForm: FC = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		if (!sessionStorage.getItem('ecommerce-admin-token')) router.push('/admin/login');
+		if (!localStorage.getItem('ecommerce-admin-token')) router.push('/admin/login');
 		setIsLoading(false);
 	}, []);
 

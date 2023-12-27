@@ -17,7 +17,7 @@ export const useSelectData = () => {
 
 	useEffect(() => {
 		const fetchUsers = async () => {
-			if (!sessionStorage.getItem('ecommerce-admin-token')) {
+			if (!localStorage.getItem('ecommerce-admin-token')) {
 				return router.push('/admin/login');
 			}
 			if (selected === 'Produtos') {

@@ -16,6 +16,7 @@ import { ProductCard } from './public/ProductCard';
 import { SearchDropdown } from './public/SearchDropdown';
 import { HeroSectionCarousel } from './public/HeroSectionCarousel';
 import { Header } from './public/Header';
+import { Footer } from './public/Footer';
 
 export {
 	InputGroup,
@@ -36,4 +37,5 @@ export {
 	SearchDropdown,
 	HeroSectionCarousel,
 	Header,
+	Footer,
 };

@@ -33,7 +33,7 @@ export const AdminLoginDiv: FC = () => {
 		}
 
 		if (res.authenticated) {
-			sessionStorage.setItem('ecommerce-admin-token', res.token);
+			localStorage.setItem('ecommerce-admin-token', res.token);
 			router.push('/admin');
 		}
 	};

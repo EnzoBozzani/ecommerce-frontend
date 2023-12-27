@@ -8,6 +8,6 @@ export interface UserDecodedToken {
 
 export function verifyToken(token: string, setUser: any) {
 	const decoded = jwtDecode(token);
-	if (decoded.exp! < Date.now() / 1000) return sessionStorage.clear();
+	if (decoded.exp! < Date.now() / 1000) return localStorage.clear();
 	setUser(decoded);
 }

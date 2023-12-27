@@ -33,7 +33,7 @@ function AdminEditProduct({ params }: Params) {
 
 	useEffect(() => {
 		const fetchProduct = async () => {
-			if (!sessionStorage.getItem('ecommerce-admin-token')) return router.push('/admin');
+			if (!localStorage.getItem('ecommerce-admin-token')) return router.push('/admin');
 			const prod: Product = await ProductsService.getProductByID(+id);
 			setProduct(prod);
 			setIsLoading(false);
