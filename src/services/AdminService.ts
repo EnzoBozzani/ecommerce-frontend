@@ -19,7 +19,7 @@ export default class AdminService {
 	}
 
 	static async getAllProducts() {
-		const token = sessionStorage.getItem('ecommerce-token');
+		const token = sessionStorage.getItem('ecommerce-admin-token');
 
 		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/products`, {
 			method: 'GET',
@@ -37,7 +37,7 @@ export default class AdminService {
 	}
 
 	static async removeProductByID(productId: number) {
-		const token = sessionStorage.getItem('ecommerce-token');
+		const token = sessionStorage.getItem('ecommerce-admin-token');
 
 		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/products`, {
 			method: 'DELETE',
@@ -56,7 +56,7 @@ export default class AdminService {
 	}
 
 	static async getAllUsers() {
-		const token = sessionStorage.getItem('ecommerce-token');
+		const token = sessionStorage.getItem('ecommerce-admin-token');
 
 		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/users`, {
 			method: 'GET',
@@ -74,7 +74,7 @@ export default class AdminService {
 	}
 
 	static async getAllPurchases() {
-		const token = sessionStorage.getItem('ecommerce-token');
+		const token = sessionStorage.getItem('ecommerce-admin-token');
 
 		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/purchases`, {
 			method: 'GET',
@@ -92,7 +92,7 @@ export default class AdminService {
 	}
 
 	static async addProduct(formData: FormData) {
-		const token = sessionStorage.getItem('ecommerce-token');
+		const token = sessionStorage.getItem('ecommerce-admin-token');
 
 		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/products`, {
 			method: 'POST',
@@ -110,7 +110,7 @@ export default class AdminService {
 	}
 
 	static async editProduct(formData: FormData) {
-		const token = sessionStorage.getItem('ecommerce-token');
+		const token = sessionStorage.getItem('ecommerce-admin-token');
 
 		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/admin/products`, {
 			method: 'PUT',
