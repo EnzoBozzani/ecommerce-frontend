@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import { screens } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
 	content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './src/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -13,6 +14,10 @@ const config: Config = {
 				lightGray: '#0000001a',
 				black: '#000',
 			},
+		},
+		screens: {
+			xs: '475px',
+			...screens,
 		},
 	},
 	plugins: [],

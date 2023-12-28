@@ -2,7 +2,7 @@
 
 import { Product } from '@/app/admin/[id]/page';
 import { useRouter } from 'next/navigation';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Loader, ProductCard } from '..';
 
 export interface ProductsList {
@@ -19,8 +19,6 @@ interface Props {
 }
 
 export const ProductsSection: FC<Props> = ({ productsList, title, isLoading }) => {
-	const router = useRouter();
-
 	return (
 		<section className='bg-light p-4 flex flex-col mx-auto max-w-[1600px]'>
 			<div className='flex flex-col gap-6 py-4 items-center'>

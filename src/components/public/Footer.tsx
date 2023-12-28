@@ -38,7 +38,7 @@ export const Footer: FC<Props> = ({ user, selected }) => {
 						viewBox='0 0 24 24'
 						strokeWidth={1.5}
 						stroke='currentColor'
-						className={classes.icon}
+						className={`${classes.icon} ${selected === 'home' && 'text-sec'}`}
 					>
 						<path
 							strokeLinecap='round'
@@ -59,7 +59,7 @@ export const Footer: FC<Props> = ({ user, selected }) => {
 						viewBox='0 0 24 24'
 						strokeWidth={1.5}
 						stroke='currentColor'
-						className={classes.icon}
+						className={`${classes.icon} ${selected === 'purchases' && 'text-sec'}`}
 					>
 						<path
 							strokeLinecap='round'
@@ -79,7 +79,7 @@ export const Footer: FC<Props> = ({ user, selected }) => {
 						viewBox='0 0 24 24'
 						strokeWidth={1.5}
 						stroke='currentColor'
-						className={classes.icon}
+						className={`${classes.icon} ${selected === 'favorites' && 'text-sec'}`}
 					>
 						<path
 							strokeLinecap='round'
@@ -99,7 +99,7 @@ export const Footer: FC<Props> = ({ user, selected }) => {
 						viewBox='0 0 24 24'
 						strokeWidth={1.5}
 						stroke='currentColor'
-						className={classes.icon}
+						className={`${classes.icon} ${selected === 'login' && 'text-sec'}`}
 					>
 						<path
 							strokeLinecap='round'

@@ -30,6 +30,22 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 		setIsLoading(false);
 	};
 
+	useEffect(() => {
+		setProductsList((currentProductsList) => {
+			if (!currentProductsList) return undefined;
+			const products = currentProductsList?.products.sort((a, b) =>
+				//@ts-ignore
+				order === 'ASC' ? a[param] - b[param] : b[param] - a[param]
+			);
+			return {
+				page: currentProductsList?.page,
+				perPage: currentProductsList?.perPage,
+				total: currentProductsList?.total,
+				products,
+			};
+		});
+	}, [order, param]);
+
 	return (
 		<section className='bg-light flex flex-col mx-auto max-w-[1600px]'>
 			<Header
