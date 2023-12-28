@@ -13,9 +13,7 @@ export default class AdminService {
 			}),
 		});
 
-		const content = await res.json();
-
-		return content;
+		return res.json();
 	}
 
 	static async getAllProducts() {
@@ -31,9 +29,7 @@ export default class AdminService {
 			},
 		});
 
-		const content = await res.json();
-
-		return content;
+		return res.json();
 	}
 
 	static async removeProductByID(productId: number) {
@@ -50,9 +46,7 @@ export default class AdminService {
 			body: JSON.stringify({ productId }),
 		});
 
-		const content = await res.json();
-
-		return content;
+		return res.json();
 	}
 
 	static async getAllUsers() {
@@ -68,9 +62,7 @@ export default class AdminService {
 			},
 		});
 
-		const content = await res.json();
-
-		return content;
+		return res.json();
 	}
 
 	static async getAllPurchases() {
@@ -86,9 +78,7 @@ export default class AdminService {
 			},
 		});
 
-		const content = await res.json();
-
-		return content;
+		return res.json();
 	}
 
 	static async addProduct(formData: FormData) {
@@ -104,9 +94,7 @@ export default class AdminService {
 			body: formData,
 		});
 
-		const content = await res.json();
-
-		return content;
+		return res.json();
 	}
 
 	static async editProduct(formData: FormData) {
@@ -122,8 +110,6 @@ export default class AdminService {
 			body: formData,
 		});
 
-		const content = await res.json();
-
-		return content;
+		return res.json();
 	}
 }

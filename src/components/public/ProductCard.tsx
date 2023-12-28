@@ -24,13 +24,13 @@ export const ProductCard: FC<Props> = ({ product }) => {
 					src={`http://${product.images[0]}`}
 					height={200}
 					width={200}
-					className='rounded-s-xl max-h-[130px] max-w-[100px] xs:max-h-[208px] xs:max-w-[160px]'
+					className='rounded-xl max-h-[130px] max-w-[100px] xs:max-h-[208px] xs:max-w-[160px]'
 				/>
 			</div>
 			<div className='h-full w-full flex flex-col'>
 				<div className='h-full flex flex-col gap-3 pt-6 xs:pt-12'>
 					<h3 className='text-lg sm:text-2xl'>
-						{width > 340 ? product.name : product.name.slice(0, 12) + '...'}
+						{width < 340 && product.name.length > 12 ? product.name.slice(0, 12) + '...' : product.name}
 					</h3>
 					<h2 className='text-dark/50 text-lg sm:text-2xl'>
 						{product.price.toLocaleString('pt-BR', {

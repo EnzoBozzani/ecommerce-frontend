@@ -24,8 +24,7 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 		setIsLoading(true);
 		if (name === '') return setIsLoading(false);
 		setTitle(name.length > 10 ? `Com "${name.slice(0, 10)}..."` : `Com "${name}"`);
-		const res = await ProductsService.getProducts({ name, order, param });
-		setName('');
+		const res = await ProductsService.getProducts({ name, order, param, page: 1, perPage: 10 });
 		setProductsList(res);
 		setIsLoading(false);
 	};

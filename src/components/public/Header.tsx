@@ -105,15 +105,15 @@ export const Header: FC<Props> = ({
 			{width >= 1024 && (
 				<div className='flex items-center gap-2'>
 					<Link href={!user ? '/login' : '/user/favorites'}>
-						<div className='flex items-center gap-2'>
-							<p className='text-dark text-xl'>Favoritos</p>
+						<div className='flex items-center gap-2 group'>
+							<p className='text-dark text-xl group-hover:text-sec'>Favoritos</p>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								fill='none'
 								viewBox='0 0 24 24'
 								strokeWidth={1.5}
 								stroke='currentColor'
-								className='w-8 h-8'
+								className='w-8 h-8 group-hover:text-sec'
 							>
 								<path
 									strokeLinecap='round'
@@ -124,15 +124,15 @@ export const Header: FC<Props> = ({
 						</div>
 					</Link>
 					<Link href={!user ? '/login' : '/user/purchases'}>
-						<div className='flex items-center gap-2'>
-							<p className='text-dark text-xl'>Compras</p>
+						<div className='flex items-center gap-2 group'>
+							<p className='text-dark text-xl group-hover:text-sec'>Compras</p>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								fill='none'
 								viewBox='0 0 24 24'
 								strokeWidth={1.5}
 								stroke='currentColor'
-								className='w-8 h-8'
+								className='w-8 h-8 group-hover:text-sec'
 							>
 								<path
 									strokeLinecap='round'
