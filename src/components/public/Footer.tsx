@@ -1,3 +1,5 @@
+'use client';
+
 import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 import { FC, useState } from 'react';
 import Link from 'next/link';

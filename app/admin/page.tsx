@@ -43,11 +43,15 @@ const AdminHome: NextPage = () => {
 					<h1 className='text-2xl md:text-6xl text-light'>Tabela de {selected}</h1>
 					<h6 className='text-lg text-primaryLight'>(Total: {data.total})</h6>
 				</section>
-				<Table
-					data={data.data}
-					headers={data.headers}
-					lastColumn={selected === 'Produtos'}
-				/>
+				{isLoading ? (
+					<Loader />
+				) : (
+					<Table
+						data={data.data}
+						headers={data.headers}
+						lastColumn={selected === 'Produtos'}
+					/>
+				)}
 			</section>
 		</main>
 	);

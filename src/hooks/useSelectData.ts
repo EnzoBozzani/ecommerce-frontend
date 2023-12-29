@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { AdminService } from '../services';
 import { useState, useEffect } from 'react';
+import { verifyToken } from '../utils/verifyToken';
 
 interface Data {
 	data: any[];
@@ -17,9 +18,9 @@ export const useSelectData = () => {
 
 	useEffect(() => {
 		const fetchUsers = async () => {
-			if (!localStorage.getItem('ecommerce-admin-token')) {
-				return router.push('/admin/login');
-			}
+			const token = localStorage.getItem('ecommerce-admin-token');
+			if (!token || !verifyToken(token)) router.push('/admin/login');
+
 			if (selected === 'Produtos') {
 				const { products, total } = await AdminService.getAllProducts();
 				setData({

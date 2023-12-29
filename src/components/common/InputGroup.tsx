@@ -3,7 +3,7 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 interface Props {
-	inputType: 'text' | 'password';
+	inputType: 'text' | 'password' | 'textarea';
 	labelFor: string;
 	labelText: string;
 	value: string;
@@ -30,6 +30,8 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 						type={type}
 						onChange={(ev) => setValue(ev.currentTarget.value)}
 						value={value}
+						minLength={5}
+						maxLength={30}
 					/>
 					{type === 'password' ? (
 						<svg
@@ -82,14 +84,30 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 			>
 				{labelText}
 			</label>
-			<input
-				className='px-1 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
-				id={labelFor}
-				name={labelFor}
-				type={inputType}
-				onChange={(ev) => setValue(ev.currentTarget.value)}
-				value={value}
-			/>
+			{inputType === 'textarea' ? (
+				<textarea
+					name={labelFor}
+					id={labelFor}
+					cols={30}
+					rows={10}
+					minLength={1}
+					maxLength={100}
+					onChange={(ev) => setValue(ev.currentTarget.value)}
+					value={value}
+					className='resize-none px-1 py-2 border-2 border-primary bg-transparent text-light focus:outline-none focus:border-sec'
+				/>
+			) : (
+				<input
+					className='px-1 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
+					id={labelFor}
+					name={labelFor}
+					type={inputType}
+					onChange={(ev) => setValue(ev.currentTarget.value)}
+					value={value}
+					minLength={1}
+					maxLength={40}
+				/>
+			)}
 		</div>
 	);
 };

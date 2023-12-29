@@ -88,7 +88,7 @@ export const AdminEditProductForm: FC<Props> = ({ product }) => {
 			</div>
 			<div className='w-4/6'>
 				<InputGroup
-					inputType='text'
+					inputType='textarea'
 					labelFor='productDesc'
 					labelText='Descrição do Produto:'
 					setValue={setDesc}

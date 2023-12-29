@@ -19,11 +19,6 @@ interface Props {
 }
 
 export const ProductsSection: FC<Props> = ({ productsList, title, isLoading }) => {
-	const pages = [];
-
-	for (let i = 0; i < productsList!.total / 3; i++) {
-		pages.push(i);
-	}
 	return (
 		<section className='bg-light p-4 flex flex-col mx-auto max-w-[1600px]'>
 			<div className='flex flex-col gap-6 py-4 items-center'>
@@ -42,11 +37,6 @@ export const ProductsSection: FC<Props> = ({ productsList, title, isLoading }) =
 						/>
 					))
 				)}
-				<div>
-					{pages.map((num) => (
-						<button>{num}</button>
-					))}
-				</div>
 			</div>
 		</section>
 	);

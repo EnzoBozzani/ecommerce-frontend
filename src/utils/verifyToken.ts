@@ -1,3 +1,5 @@
+'use client';
+
 import { jwtDecode } from 'jwt-decode';
 
 export interface UserDecodedToken {
@@ -6,8 +8,14 @@ export interface UserDecodedToken {
 	email: string;
 }
 
-export function verifyToken(token: string, setUser: any) {
+export function verifyToken(token: string, setUser?: any) {
 	const decoded = jwtDecode(token);
-	if (decoded.exp! < Date.now() / 1000) return localStorage.clear();
-	setUser(decoded);
+	if (decoded.exp! < Date.now() / 1000) {
+		localStorage.clear();
+		return false;
+	}
+	if (setUser) {
+		setUser(decoded);
+	}
+	return true;
 }

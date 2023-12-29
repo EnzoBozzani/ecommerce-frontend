@@ -4,6 +4,7 @@ import { AdminService } from '@/src/services';
 import { useRouter } from 'next/navigation';
 import { FC, FormEvent, useState, useEffect } from 'react';
 import { Button, FileInput, InputGroup, Loader, SelectInput, Toast } from '..';
+import { verifyToken } from '@/src/utils/verifyToken';
 
 export const AdminAddProductForm: FC = () => {
 	const router = useRouter();
@@ -19,7 +20,8 @@ export const AdminAddProductForm: FC = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		if (!localStorage.getItem('ecommerce-admin-token')) router.push('/admin/login');
+		const token = localStorage.getItem('ecommerce-admin-token');
+		if (!token || !verifyToken(token)) router.push('/admin/login');
 		setIsLoading(false);
 	}, []);
 
@@ -91,7 +93,7 @@ export const AdminAddProductForm: FC = () => {
 			</div>
 			<div className='w-4/6'>
 				<InputGroup
-					inputType='text'
+					inputType='textarea'
 					labelFor='productDesc'
 					labelText='Descrição do Produto:'
 					setValue={setDesc}

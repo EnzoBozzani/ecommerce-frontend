@@ -1,10 +1,11 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { InputGroup, Toast } from '..';
 import { Button } from '..';
 import { AdminService } from '@/src/services';
 import { useRouter } from 'next/navigation';
+import { verifyToken } from '@/src/utils/verifyToken';
 
 export const AdminLoginDiv: FC = () => {
 	const router = useRouter();
@@ -13,6 +14,11 @@ export const AdminLoginDiv: FC = () => {
 	const [password, setPassword] = useState('');
 	const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
+
+	useEffect(() => {
+		const token = localStorage.getItem('ecommerce-admin-token');
+		if (token && verifyToken(token)) router.push('/admin');
+	}, []);
 
 	const handleClick = async () => {
 		if (email === '' || password === '') {

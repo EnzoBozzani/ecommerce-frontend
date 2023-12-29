@@ -2,6 +2,7 @@
 
 import { AdminEditProductForm, Loader } from '@/src/components';
 import { ProductsService } from '@/src/services';
+import { verifyToken } from '@/src/utils/verifyToken';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -33,7 +34,8 @@ function AdminEditProduct({ params }: Params) {
 
 	useEffect(() => {
 		const fetchProduct = async () => {
-			if (!localStorage.getItem('ecommerce-admin-token')) return router.push('/admin');
+			const token = localStorage.getItem('ecommerce-admin-token');
+			if (!token || !verifyToken(token)) router.push('/admin/login');
 			const prod: Product = await ProductsService.getProductByID(+id);
 			setProduct(prod);
 			setIsLoading(false);
