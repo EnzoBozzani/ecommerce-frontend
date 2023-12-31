@@ -8,23 +8,34 @@ interface Props {
 	labelText: string;
 	value: string;
 	setValue: Dispatch<SetStateAction<string>>;
+	style: 'darkMode' | 'lightMode';
 }
 
-export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, labelText }) => {
+export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, labelText, style }) => {
 	const [type, setType] = useState<'password' | 'text'>('password');
+
+	const inputStyle =
+		style === 'darkMode'
+			? 'px-1 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
+			: 'w-full px-1 py-2 border-[1.75px] border-dark/20 rounded-lg bg-black/5 focus:outline-none focus:border-primaryLight';
+
+	const labelStyle = style === 'darkMode' ? 'text-light font-bold' : 'text-dark font-semibold';
+
+	const iconStyle =
+		style === 'darkMode' ? 'w-8 h-8 text-light -ms-8 cursor-pointer' : 'w-8 h-8 text-dark/60 -ms-10 cursor-pointer';
 
 	if (inputType === 'password') {
 		return (
 			<div className='flex flex-col gap-2'>
 				<label
-					className='text-light font-bold'
+					className={labelStyle}
 					htmlFor={labelFor}
 				>
 					{labelText}
 				</label>
-				<div className='flex'>
+				<div className='flex items-center'>
 					<input
-						className='px-1 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
+						className={inputStyle}
 						id={labelFor}
 						name={labelFor}
 						type={type}
@@ -40,7 +51,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 							viewBox='0 0 24 24'
 							strokeWidth={1.5}
 							stroke='currentColor'
-							className='w-8 h-8 text-light -ms-8 cursor-pointer'
+							className={iconStyle}
 							onClick={() => setType('text')}
 						>
 							<path
@@ -61,7 +72,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 							viewBox='0 0 24 24'
 							strokeWidth={1.5}
 							stroke='currentColor'
-							className='w-8 h-8 text-light -ms-8 cursor-pointer'
+							className={iconStyle}
 							onClick={() => setType('password')}
 						>
 							<path
@@ -79,7 +90,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 	return (
 		<div className='flex flex-col gap-2'>
 			<label
-				className='text-light font-bold'
+				className={labelStyle}
 				htmlFor={labelFor}
 			>
 				{labelText}
@@ -98,7 +109,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 				/>
 			) : (
 				<input
-					className='px-1 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
+					className={inputStyle}
 					id={labelFor}
 					name={labelFor}
 					type={inputType}

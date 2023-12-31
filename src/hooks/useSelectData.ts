@@ -19,7 +19,7 @@ export const useSelectData = () => {
 	useEffect(() => {
 		const fetchUsers = async () => {
 			const token = localStorage.getItem('ecommerce-admin-token');
-			if (!token || !verifyToken(token)) router.push('/admin/login');
+			if (!token || !verifyToken(token)) return router.push('/admin/login');
 
 			if (selected === 'Produtos') {
 				const { products, total } = await AdminService.getAllProducts();

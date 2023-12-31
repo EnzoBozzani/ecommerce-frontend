@@ -12,10 +12,7 @@ export function verifyToken(token: string, setUser?: any) {
 	const decoded = jwtDecode(token);
 	if (decoded.exp! < Date.now() / 1000) {
 		localStorage.clear();
-		return false;
+		return undefined;
 	}
-	if (setUser) {
-		setUser(decoded);
-	}
-	return true;
+	return decoded as UserDecodedToken;
 }

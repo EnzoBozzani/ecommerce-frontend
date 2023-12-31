@@ -17,6 +17,7 @@ import { SearchDropdown } from './public/SearchDropdown';
 import { HeroSectionCarousel } from './public/HeroSectionCarousel';
 import { Header } from './public/Header';
 import { Footer } from './public/Footer';
+import { LoginDiv } from './public/LoginDiv';
 
 export {
 	InputGroup,
@@ -38,4 +39,5 @@ export {
 	HeroSectionCarousel,
 	Header,
 	Footer,
+	LoginDiv,
 };

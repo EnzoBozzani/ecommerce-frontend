@@ -69,6 +69,7 @@ export const AdminLoginDiv: FC = () => {
 					labelText='Email'
 					setValue={setEmail}
 					value={email}
+					style='darkMode'
 				/>
 				<InputGroup
 					inputType='password'
@@ -76,6 +77,7 @@ export const AdminLoginDiv: FC = () => {
 					labelText='Senha'
 					setValue={setPassword}
 					value={password}
+					style='darkMode'
 				/>
 				<div className='flex flex-col gap-4'>
 					<Button

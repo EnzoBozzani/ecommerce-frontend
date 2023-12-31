@@ -1,10 +1,11 @@
 'use client';
 
 import { AdminService } from '@/src/services';
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
 import { Button, FileInput, InputGroup, SelectInput, Toast } from '..';
 import { Product } from '@/app/admin/[id]/page';
 import { useRouter } from 'next/navigation';
+import { verifyToken } from '@/src/utils/verifyToken';
 
 interface Props {
 	product: Product | undefined;
@@ -21,6 +22,11 @@ export const AdminEditProductForm: FC<Props> = ({ product }) => {
 	const [isToastOpen, setIsToastOpen] = useState(false);
 	const [toastText, setToastText] = useState('');
 	const [toastType, setToastType] = useState<'error' | 'success' | 'normal'>('error');
+
+	useEffect(() => {
+		const token = localStorage.getItem('ecommerce-admin-token');
+		if (!token || !verifyToken(token)) router.push('/admin/login');
+	}, []);
 
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
@@ -84,6 +90,7 @@ export const AdminEditProductForm: FC<Props> = ({ product }) => {
 					labelText='Nome do Produto:'
 					setValue={setName}
 					value={name}
+					style='darkMode'
 				/>
 			</div>
 			<div className='w-4/6'>
@@ -93,6 +100,7 @@ export const AdminEditProductForm: FC<Props> = ({ product }) => {
 					labelText='Descrição do Produto:'
 					setValue={setDesc}
 					value={desc}
+					style='darkMode'
 				/>
 			</div>
 			<section className='w-full flex flex-col justify-center items-center gap-8'>
@@ -125,6 +133,7 @@ export const AdminEditProductForm: FC<Props> = ({ product }) => {
 					labelText='Preço (em R$):'
 					setValue={setPrice}
 					value={price}
+					style='darkMode'
 				/>
 				<InputGroup
 					inputType='text'
@@ -132,6 +141,7 @@ export const AdminEditProductForm: FC<Props> = ({ product }) => {
 					labelText='Em estoque:'
 					setValue={setInStock}
 					value={inStock}
+					style='darkMode'
 				/>
 				<SelectInput
 					setValue={setFeatured}

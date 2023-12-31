@@ -15,7 +15,8 @@ export default function Home() {
 	useEffect(() => {
 		const token = localStorage.getItem('ecommerce-token');
 		if (token) {
-			verifyToken(token, setUser);
+			const decoded = verifyToken(token);
+			setUser(decoded);
 		}
 		const fetchProducts = async () => {
 			const res = await ProductsService.getFeaturedProducts();

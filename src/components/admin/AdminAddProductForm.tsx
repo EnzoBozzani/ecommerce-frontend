@@ -89,6 +89,7 @@ export const AdminAddProductForm: FC = () => {
 					labelText='Nome do Produto:'
 					setValue={setName}
 					value={name}
+					style='darkMode'
 				/>
 			</div>
 			<div className='w-4/6'>
@@ -98,6 +99,7 @@ export const AdminAddProductForm: FC = () => {
 					labelText='Descrição do Produto:'
 					setValue={setDesc}
 					value={desc}
+					style='darkMode'
 				/>
 			</div>
 			<section className='w-full flex flex-col justify-center items-center gap-8'>
@@ -130,6 +132,7 @@ export const AdminAddProductForm: FC = () => {
 					labelText='Preço (em R$):'
 					setValue={setPrice}
 					value={price}
+					style='darkMode'
 				/>
 				<InputGroup
 					inputType='text'
@@ -137,6 +140,7 @@ export const AdminAddProductForm: FC = () => {
 					labelText='Em estoque:'
 					setValue={setInStock}
 					value={inStock}
+					style='darkMode'
 				/>
 				<SelectInput
 					setValue={setFeatured}
