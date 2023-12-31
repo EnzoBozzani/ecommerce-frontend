@@ -3,15 +3,16 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 interface Props {
-	inputType: 'text' | 'password' | 'textarea';
+	inputType: 'text' | 'password' | 'textarea' | 'email';
 	labelFor: string;
 	labelText: string;
 	value: string;
 	setValue: Dispatch<SetStateAction<string>>;
 	style: 'darkMode' | 'lightMode';
+	mask?: 'phone' | 'date';
 }
 
-export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, labelText, style }) => {
+export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, labelText, style, mask }) => {
 	const [type, setType] = useState<'password' | 'text'>('password');
 
 	const inputStyle =
@@ -117,6 +118,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 					value={value}
 					minLength={1}
 					maxLength={40}
+					data-mask={mask === 'phone' ? '[-]+55 (00) 00000-0000' : mask === 'date' ? 'dd/mm/yyyy' : ''}
 				/>
 			)}
 		</div>

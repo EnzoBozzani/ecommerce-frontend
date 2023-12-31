@@ -15,4 +15,18 @@ export default class AuthService {
 
 		return res.json();
 	}
+
+	static async register(formData: FormData) {
+		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/auth/register`, {
+			method: 'POST',
+			headers: {
+				// prettier-ignore
+				'Accept': 'application/json',
+				'Content-Type': 'multipart/form-data',
+			},
+			body: formData,
+		});
+
+		return res.json();
+	}
 }

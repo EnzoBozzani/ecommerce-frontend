@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 function RegisterPage() {
 	return (
-		<main className='w-full min-h-screen bg-black/5 pt-12'>
+		<main className='w-full min-h-screen bg-black/5 py-12'>
 			<RegisterDiv />
 		</main>
 	);

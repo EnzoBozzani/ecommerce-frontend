@@ -50,7 +50,7 @@ export const LoginDiv: FC = () => {
 			<h3 className='w-full text-center font-semibold text-2xl xs:text-4xl mb-4'>Acessar conta</h3>
 			<div className='w-full mb-6'>
 				<InputGroup
-					inputType='text'
+					inputType='email'
 					labelFor='email'
 					labelText='E-mail:'
 					setValue={setEmail}
