@@ -148,7 +148,7 @@ export const AdminEditProductForm: FC<Props> = ({ product }) => {
 					value={featured}
 				/>
 			</section>
-			<div className='flex flex-col w-2/3 sm:w-auto gap-8 mt-8'>
+			<div className='flex flex-col w-2/3 sm:w-1/3 gap-8 mt-8'>
 				<Button
 					buttonText='Adicionar'
 					submit

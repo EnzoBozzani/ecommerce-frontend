@@ -1,14 +1,14 @@
 import { LoginDiv, Logo } from '@/src/components';
-import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Ecommerce - Login',
+	description: 'Login to Ecommerce platform with tech products',
+};
 
 function LoginPage() {
 	return (
-		<main className='w-full min-h-screen bg-black/5'>
-			<header className='w-full p-6 bg-light border-b border-b-dark/20'>
-				<Link href={'/'}>
-					<Logo className='w-12 h-12 text-primaryLight' />
-				</Link>
-			</header>
+		<main className='w-full min-h-screen bg-black/5 pt-12'>
 			<LoginDiv />
 		</main>
 	);

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { AuthService } from '@/src/services';
 
-export const LoginDiv: FC = () => {
+export const RegisterDiv: FC = () => {
 	const router = useRouter();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -47,8 +47,28 @@ export const LoginDiv: FC = () => {
 					<Logo className='w-16 h-16 text-primaryLight' />
 				</Link>
 			</div>
-			<h3 className='w-full text-center font-semibold text-2xl xs:text-4xl mb-4'>Acessar conta</h3>
-			<div className='w-full mb-6'>
+			<h3 className='w-full text-center font-semibold text-2xl xs:text-4xl mb-4'>Criar conta</h3>
+			<div className='w-full'>
+				<InputGroup
+					inputType='text'
+					labelFor='firstName'
+					labelText='Nome:'
+					setValue={setEmail}
+					value={email}
+					style='lightMode'
+				/>
+			</div>
+			<div className='w-full'>
+				<InputGroup
+					inputType='text'
+					labelFor='lastName'
+					labelText='Sobrenome:'
+					setValue={setEmail}
+					value={email}
+					style='lightMode'
+				/>
+			</div>
+			<div className='w-full'>
 				<InputGroup
 					inputType='text'
 					labelFor='email'
@@ -58,7 +78,7 @@ export const LoginDiv: FC = () => {
 					style='lightMode'
 				/>
 			</div>
-			<div className='w-full mb-6'>
+			<div className='w-full'>
 				<InputGroup
 					inputType='password'
 					labelFor='password'
@@ -68,6 +88,7 @@ export const LoginDiv: FC = () => {
 					style='lightMode'
 				/>
 			</div>
+			<div className=''>{/* criar aqui mesmo um input para o aniversário (usar uma máscara talvez?) */}</div>
 			<div className='flex flex-col gap-4'>
 				<Button
 					buttonText='Entrar'
@@ -81,14 +102,13 @@ export const LoginDiv: FC = () => {
 					type='error'
 				/>
 				<p className='w-full text-center text-dark border-t border-t-dark/20 pt-4'>
-					Não tem uma conta?{' '}
+					Já tem uma conta?{' '}
 					<Link
 						className='text-sec hover:underline hover:text-sec/80'
-						href={'/register'}
+						href={'/login'}
 					>
-						Cadastre-se
+						Entrar
 					</Link>
-					.
 				</p>
 			</div>
 		</section>

@@ -5,7 +5,7 @@ import '@/src/styles/globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Ecommerce Platform',
+	title: 'Ecommerce - Home',
 	description: 'Ecommerce platform with tech products',
 };
 

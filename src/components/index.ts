@@ -18,6 +18,7 @@ import { HeroSectionCarousel } from './public/HeroSectionCarousel';
 import { Header } from './public/Header';
 import { Footer } from './public/Footer';
 import { LoginDiv } from './public/LoginDiv';
+import { RegisterDiv } from './public/RegisterDiv';
 
 export {
 	InputGroup,
@@ -40,4 +41,5 @@ export {
 	Header,
 	Footer,
 	LoginDiv,
+	RegisterDiv,
 };

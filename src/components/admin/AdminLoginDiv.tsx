@@ -79,7 +79,7 @@ export const AdminLoginDiv: FC = () => {
 					value={password}
 					style='darkMode'
 				/>
-				<div className='flex flex-col gap-4'>
+				<div className='flex flex-col gap-4 w-2/3'>
 					<Button
 						buttonText='Login'
 						handleClick={handleClick}
