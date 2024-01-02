@@ -1,3 +1,12 @@
+interface RegisterBody {
+	firstName: string;
+	lastName: string;
+	phone: string;
+	birth: string;
+	email: string;
+	password: string;
+}
+
 export default class AuthService {
 	static async login(email: string, password: string) {
 		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/auth/login`, {
@@ -16,15 +25,15 @@ export default class AuthService {
 		return res.json();
 	}
 
-	static async register(formData: FormData) {
+	static async register(body: RegisterBody) {
 		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/auth/register`, {
 			method: 'POST',
 			headers: {
 				// prettier-ignore
 				'Accept': 'application/json',
-				'Content-Type': 'multipart/form-data',
+				'Content-Type': 'application/json',
 			},
-			body: formData,
+			body: JSON.stringify(body),
 		});
 
 		return res.json();

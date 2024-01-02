@@ -44,15 +44,16 @@ export const RegisterDiv: FC = () => {
 
 		const birthFormatted = `${birth.slice(6, 10)}-${birth.slice(3, 5)}-${birth.slice(0, 2)}`;
 
-		const formData = new FormData();
-		formData.append('firstName', firstName);
-		formData.append('lastName', lastName);
-		formData.append('phone', phone);
-		formData.append('birth', birthFormatted);
-		formData.append('email', email);
-		formData.append('password', password);
+		const body = {
+			firstName,
+			lastName,
+			phone,
+			birth: birthFormatted,
+			email,
+			password,
+		};
 
-		const res = await AuthService.register(formData);
+		const res = await AuthService.register(body);
 		setFirstName('');
 		setLastName('');
 		setBirth('');
