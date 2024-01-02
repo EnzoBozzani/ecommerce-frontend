@@ -128,7 +128,7 @@ export const Footer: FC<Props> = ({ user, selected }) => {
 					<h3>Home</h3>
 				</Link>
 				<Link
-					href={!user ? '/login' : '/user/purchases'}
+					href={user ? '/user/purchases' : '/login'}
 					className={`${classes.iconGroup} ${selected === 'purchases' && 'text-sec'}`}
 				>
 					<svg
@@ -168,7 +168,7 @@ export const Footer: FC<Props> = ({ user, selected }) => {
 					<h3>Favoritos</h3>
 				</Link>
 				<Link
-					href={user ? '/' : '/login'}
+					href={user ? '/user' : '/login'}
 					className={`${classes.iconGroup} ${selected === 'login' && 'text-sec'}`}
 				>
 					<svg
@@ -185,7 +185,7 @@ export const Footer: FC<Props> = ({ user, selected }) => {
 							d='M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z'
 						/>
 					</svg>
-					<h3>Entrar</h3>
+					<h3>{user ? 'Usuário' : 'Entrar'}</h3>
 				</Link>
 			</nav>
 		</footer>

@@ -23,8 +23,7 @@ export const LoginDiv: FC = () => {
 			return;
 		}
 		const res = await AuthService.login(email, password);
-		setEmail('');
-		setPassword('');
+
 		if (res.message) {
 			setErrorMessage('Login e/ou senha incorretos!');
 			setIsErrorAlertOpen(true);
@@ -33,6 +32,9 @@ export const LoginDiv: FC = () => {
 			}, 2 * 1000);
 			return;
 		}
+
+		setEmail('');
+		setPassword('');
 
 		if (res.authenticated) {
 			localStorage.setItem('ecommerce-token', res.token);

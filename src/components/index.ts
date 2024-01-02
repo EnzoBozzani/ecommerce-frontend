@@ -19,6 +19,7 @@ import { Header } from './public/Header';
 import { Footer } from './public/Footer';
 import { LoginDiv } from './public/LoginDiv';
 import { RegisterDiv } from './public/RegisterDiv';
+import { UserPagesHeader } from './public/UserPagesHeader';
 
 export {
 	InputGroup,
@@ -42,4 +43,5 @@ export {
 	Footer,
 	LoginDiv,
 	RegisterDiv,
+	UserPagesHeader,
 };
