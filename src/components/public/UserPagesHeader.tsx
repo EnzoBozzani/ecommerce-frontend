@@ -2,25 +2,28 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FC } from 'react';
-import { Logo } from '..';
+import { FC, useState } from 'react';
+import { Logo, ConfirmModal } from '..';
 import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 import { UserDecodedToken } from '@/src/utils/verifyToken';
 
 interface Props {
 	user: UserDecodedToken | undefined;
+	selectedPage: 'user' | 'purchases' | 'favorites';
 }
 
-export const UserPagesHeader: FC<Props> = ({ user }) => {
+export const UserPagesHeader: FC<Props> = ({ user, selectedPage }) => {
 	const router = useRouter();
 	const width = useScreenWidth();
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
 	const handleClick = () => {
-		const conf = confirm(`Tem certeza que deseja sair, ${user?.firstName}?`);
-		if (conf) {
-			localStorage.removeItem('ecommerce-token');
-			router.push('/');
-		}
+		setIsModalOpen(true);
+	};
+
+	const handleConfirm = () => {
+		localStorage.removeItem('ecommerce-token');
+		router.push('/');
 	};
 
 	if (width <= 1024) {
@@ -50,6 +53,12 @@ export const UserPagesHeader: FC<Props> = ({ user }) => {
 						/>
 					</svg>
 				</button>
+				{isModalOpen && (
+					<ConfirmModal
+						handleConfirm={handleConfirm}
+						setIsOpen={setIsModalOpen}
+					/>
+				)}
 			</header>
 		);
 	}
@@ -62,14 +71,22 @@ export const UserPagesHeader: FC<Props> = ({ user }) => {
 			<div className='flex items-center gap-6'>
 				<Link href={'/user/favorites'}>
 					<div className='flex items-center gap-2 group'>
-						<p className='text-dark text-xl group-hover:text-sec'>Favoritos</p>
+						<p
+							className={`${
+								selectedPage === 'favorites' ? 'text-sec' : 'text-dark'
+							} text-xl group-hover:text-primaryLight`}
+						>
+							Favoritos
+						</p>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							fill='none'
 							viewBox='0 0 24 24'
 							strokeWidth={1.5}
 							stroke='currentColor'
-							className='w-8 h-8 group-hover:text-sec'
+							className={`${
+								selectedPage === 'favorites' ? 'text-sec' : 'text-dark'
+							} w-8 h-8 group-hover:text-primaryLight`}
 						>
 							<path
 								strokeLinecap='round'
@@ -81,14 +98,22 @@ export const UserPagesHeader: FC<Props> = ({ user }) => {
 				</Link>
 				<Link href={'/user/purchases'}>
 					<div className='flex items-center gap-2 group'>
-						<p className='text-dark text-xl group-hover:text-sec'>Compras</p>
+						<p
+							className={`${
+								selectedPage === 'purchases' ? 'text-sec' : 'text-dark'
+							} text-xl group-hover:text-primaryLight`}
+						>
+							Compras
+						</p>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							fill='none'
 							viewBox='0 0 24 24'
 							strokeWidth={1.5}
 							stroke='currentColor'
-							className='w-8 h-8 group-hover:text-sec'
+							className={`${
+								selectedPage === 'purchases' ? 'text-sec' : 'text-dark'
+							} w-8 h-8 group-hover:text-primaryLight`}
 						>
 							<path
 								strokeLinecap='round'
@@ -102,14 +127,22 @@ export const UserPagesHeader: FC<Props> = ({ user }) => {
 					href={'/user'}
 					className='flex gap-2 items-center group'
 				>
-					<h6 className='text-dark text-xl group-hover:text-sec'>Usuário</h6>
+					<h6
+						className={`${
+							selectedPage === 'user' ? 'text-sec' : 'text-dark'
+						} text-xl group-hover:text-primaryLight`}
+					>
+						Usuário
+					</h6>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						fill='none'
 						viewBox='0 0 24 24'
 						strokeWidth={1.5}
 						stroke='currentColor'
-						className='w-10 h-10 text-dark group-hover:text-sec'
+						className={`${
+							selectedPage === 'user' ? 'text-sec' : 'text-dark'
+						} w-10 h-10 group-hover:text-primaryLight`}
 					>
 						<path
 							strokeLinecap='round'
@@ -120,7 +153,7 @@ export const UserPagesHeader: FC<Props> = ({ user }) => {
 				</Link>
 				<button
 					onClick={handleClick}
-					className='flex items-center gap-2 text-dark hover:text-sec'
+					className='flex items-center gap-2 text-dark hover:text-red-600'
 				>
 					<h3 className='text-xl'>Sair</h3>
 					<svg
@@ -139,6 +172,12 @@ export const UserPagesHeader: FC<Props> = ({ user }) => {
 					</svg>
 				</button>
 			</div>
+			{isModalOpen && (
+				<ConfirmModal
+					handleConfirm={handleConfirm}
+					setIsOpen={setIsModalOpen}
+				/>
+			)}
 		</header>
 	);
 };

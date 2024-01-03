@@ -19,7 +19,10 @@ function UserData() {
 
 	return (
 		<main className='w-full min-h-screen bg-light'>
-			<UserPagesHeader user={user} />
+			<UserPagesHeader
+				user={user}
+				selectedPage='user'
+			/>
 			{/* criar componente para os forms de atualizar dados e atualizar senha */}
 			<Footer
 				selected='login'

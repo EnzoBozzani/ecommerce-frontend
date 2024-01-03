@@ -20,6 +20,7 @@ import { Footer } from './public/Footer';
 import { LoginDiv } from './public/LoginDiv';
 import { RegisterDiv } from './public/RegisterDiv';
 import { UserPagesHeader } from './public/UserPagesHeader';
+import { ConfirmModal } from './public/ConfirmModal';
 
 export {
 	InputGroup,
@@ -44,4 +45,5 @@ export {
 	LoginDiv,
 	RegisterDiv,
 	UserPagesHeader,
+	ConfirmModal,
 };
