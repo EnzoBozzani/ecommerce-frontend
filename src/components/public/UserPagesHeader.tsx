@@ -6,9 +6,10 @@ import { FC, useState } from 'react';
 import { Logo, ConfirmModal } from '..';
 import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 import { UserDecodedToken } from '@/src/utils/verifyToken';
+import { UserData } from '@/app/user/page';
 
 interface Props {
-	user: UserDecodedToken | undefined;
+	user: UserDecodedToken | UserData | undefined;
 	selectedPage: 'user' | 'purchases' | 'favorites';
 }
 
@@ -69,7 +70,7 @@ export const UserPagesHeader: FC<Props> = ({ user, selectedPage }) => {
 				<Logo className='w-14 h-14 text-primaryLight' />
 			</Link>
 			<div className='flex items-center gap-6'>
-				<Link href={'/user/favorites'}>
+				<Link href={user ? '/user/favorites' : '/login'}>
 					<div className='flex items-center gap-2 group'>
 						<p
 							className={`${
@@ -96,7 +97,7 @@ export const UserPagesHeader: FC<Props> = ({ user, selectedPage }) => {
 						</svg>
 					</div>
 				</Link>
-				<Link href={'/user/purchases'}>
+				<Link href={user ? '/user/purchases' : '/login'}>
 					<div className='flex items-center gap-2 group'>
 						<p
 							className={`${
@@ -124,7 +125,7 @@ export const UserPagesHeader: FC<Props> = ({ user, selectedPage }) => {
 					</div>
 				</Link>
 				<Link
-					href={'/user'}
+					href={user ? '/user' : '/login'}
 					className='flex gap-2 items-center group'
 				>
 					<h6

@@ -1,29 +1,75 @@
 'use client';
 
-import { UserPagesHeader, Footer } from '@/src/components';
+import { UserPagesHeader, Footer, UpdateUserDataForm, UpdateUserPasswordForm, Loader } from '@/src/components';
 import { UserDecodedToken, verifyToken } from '@/src/utils/verifyToken';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+export interface UserData {
+	id: number;
+	firstName: string;
+	lastName: string;
+	phone: string;
+	birth: string;
+	email: string;
+	password: string;
+	role: 'admin' | 'user';
+}
+
 function UserData() {
 	const router = useRouter();
-	const [user, setUser] = useState<UserDecodedToken>();
+	const [user, setUser] = useState<UserDecodedToken | UserData>();
+	const [selectedForm, setSelectedForm] = useState<'data' | 'password'>('data');
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		const token = localStorage.getItem('ecommerce-token');
-		if (!token) return router.push('/login');
-		const decoded = verifyToken(token);
-		if (!decoded) return router.push('/login');
-		setUser(decoded);
+		const fetchUser = async () => {
+			const token = localStorage.getItem('ecommerce-token');
+			if (!token) return router.push('/login');
+			const decoded = verifyToken(token);
+			if (!decoded) return router.push('/login');
+			//const completeUser = await UsersService.getUserData(decoded.id);
+			//setUser(completeUser);
+			setIsLoading(false);
+		};
+
+		fetchUser();
 	}, []);
 
+	if (isLoading)
+		return (
+			<div className='w-full min-h-screen flex justify-center items-center bg-dark'>
+				<Loader />
+			</div>
+		);
+
 	return (
-		<main className='w-full min-h-screen bg-light'>
+		<main className='w-full min-h-screen bg-light flex flex-col'>
 			<UserPagesHeader
 				user={user}
 				selectedPage='user'
 			/>
-			{/* criar componente para os forms de atualizar dados e atualizar senha */}
+			<section className='flex-1 flex flex-col'>
+				<div className='mx-auto my-12'>
+					<button
+						onClick={() => setSelectedForm('data')}
+						className={`rounded-l hover:bg-opacity-90 text-light px-4 py-2 ${
+							selectedForm === 'data' ? 'bg-primary' : 'bg-dark'
+						}`}
+					>
+						Alterar Dados
+					</button>
+					<button
+						onClick={() => setSelectedForm('password')}
+						className={`rounded-r hover:bg-opacity-90 text-light px-4 py-2 ${
+							selectedForm === 'password' ? 'bg-primary' : 'bg-dark'
+						}`}
+					>
+						Alterar Senha
+					</button>
+				</div>
+				{selectedForm === 'data' ? <UpdateUserDataForm /> : <UpdateUserPasswordForm />}
+			</section>
 			<Footer
 				selected='login'
 				user={user}

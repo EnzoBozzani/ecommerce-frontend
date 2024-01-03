@@ -5,9 +5,10 @@ import { FC, useState } from 'react';
 import Link from 'next/link';
 import { UserDecodedToken } from '@/src/utils/verifyToken';
 import Image from 'next/image';
+import { UserData } from '@/app/user/page';
 
 interface Props {
-	user: UserDecodedToken | undefined;
+	user: UserDecodedToken | UserData | undefined;
 	selected: 'home' | 'purchases' | 'favorites' | 'login';
 }
 

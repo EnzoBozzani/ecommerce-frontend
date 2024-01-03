@@ -21,6 +21,8 @@ import { LoginDiv } from './public/LoginDiv';
 import { RegisterDiv } from './public/RegisterDiv';
 import { UserPagesHeader } from './public/UserPagesHeader';
 import { ConfirmModal } from './public/ConfirmModal';
+import { UpdateUserDataForm } from './public/UpdateUserDataForm';
+import { UpdateUserPasswordForm } from './public/UpdateUserPasswordForm';
 
 export {
 	InputGroup,
@@ -46,4 +48,6 @@ export {
 	RegisterDiv,
 	UserPagesHeader,
 	ConfirmModal,
+	UpdateUserDataForm,
+	UpdateUserPasswordForm,
 };
