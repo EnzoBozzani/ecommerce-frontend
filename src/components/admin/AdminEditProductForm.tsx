@@ -127,22 +127,26 @@ export const AdminEditProductForm: FC<Props> = ({ product }) => {
 				/>
 			</section>
 			<section className='w-2/3 flex flex-col lg:flex-row gap-8 lg:gap-0 lg:justify-between'>
-				<InputGroup
-					inputType='text'
-					labelFor='price'
-					labelText='Preço (em R$):'
-					setValue={setPrice}
-					value={price}
-					style='darkMode'
-				/>
-				<InputGroup
-					inputType='text'
-					labelFor='in_stock'
-					labelText='Em estoque:'
-					setValue={setInStock}
-					value={inStock}
-					style='darkMode'
-				/>
+				<div className='w-full lg:w-1/3'>
+					<InputGroup
+						inputType='text'
+						labelFor='price'
+						labelText='Preço (em R$):'
+						setValue={setPrice}
+						value={price}
+						style='darkMode'
+					/>
+				</div>
+				<div className='w-full lg:w-1/3'>
+					<InputGroup
+						inputType='text'
+						labelFor='in_stock'
+						labelText='Em estoque:'
+						setValue={setInStock}
+						value={inStock}
+						style='darkMode'
+					/>
+				</div>
 				<SelectInput
 					setValue={setFeatured}
 					value={featured}

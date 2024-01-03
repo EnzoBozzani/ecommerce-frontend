@@ -17,7 +17,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 
 	const inputStyle =
 		style === 'darkMode'
-			? 'px-1 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
+			? 'w-full px-1 py-2 border-b-2 border-b-primary bg-transparent focus:outline-none text-light focus:border-b-sec'
 			: 'w-full px-1 py-2 border-[1.75px] border-dark/20 rounded-lg bg-black/5 focus:outline-none focus:border-primaryLight';
 
 	const labelStyle = style === 'darkMode' ? 'text-light font-bold' : 'text-dark font-semibold';
@@ -27,7 +27,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 
 	if (inputType === 'password') {
 		return (
-			<div className='flex flex-col gap-2'>
+			<div className='flex flex-col gap-2 w-full'>
 				<label
 					className={labelStyle}
 					htmlFor={labelFor}
@@ -89,7 +89,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 	}
 
 	return (
-		<div className='flex flex-col gap-2'>
+		<div className='flex flex-col gap-2 w-full'>
 			<label
 				className={labelStyle}
 				htmlFor={labelFor}

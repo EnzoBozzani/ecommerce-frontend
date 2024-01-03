@@ -1,6 +1,7 @@
 'use client';
 
 import { UserPagesHeader, Footer, UpdateUserDataForm, UpdateUserPasswordForm, Loader } from '@/src/components';
+import { UsersService } from '@/src/services';
 import { UserDecodedToken, verifyToken } from '@/src/utils/verifyToken';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -18,7 +19,8 @@ export interface UserData {
 
 function UserData() {
 	const router = useRouter();
-	const [user, setUser] = useState<UserDecodedToken | UserData>();
+	const [user, setUser] = useState<UserDecodedToken>();
+	const [userData, setUserData] = useState<UserData>();
 	const [selectedForm, setSelectedForm] = useState<'data' | 'password'>('data');
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -28,8 +30,9 @@ function UserData() {
 			if (!token) return router.push('/login');
 			const decoded = verifyToken(token);
 			if (!decoded) return router.push('/login');
-			//const completeUser = await UsersService.getUserData(decoded.id);
-			//setUser(completeUser);
+			const completeUser: UserData = await UsersService.getUserData();
+			setUser(decoded);
+			setUserData(completeUser);
 			setIsLoading(false);
 		};
 
@@ -50,7 +53,7 @@ function UserData() {
 				selectedPage='user'
 			/>
 			<section className='flex-1 flex flex-col'>
-				<div className='mx-auto my-12'>
+				<div className='mx-auto mt-12'>
 					<button
 						onClick={() => setSelectedForm('data')}
 						className={`rounded-l hover:bg-opacity-90 text-light px-4 py-2 ${
@@ -68,7 +71,7 @@ function UserData() {
 						Alterar Senha
 					</button>
 				</div>
-				{selectedForm === 'data' ? <UpdateUserDataForm /> : <UpdateUserPasswordForm />}
+				{selectedForm === 'data' ? <UpdateUserDataForm user={userData} /> : <UpdateUserPasswordForm />}
 			</section>
 			<Footer
 				selected='login'

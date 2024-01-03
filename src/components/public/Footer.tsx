@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { UserData } from '@/app/user/page';
 
 interface Props {
-	user: UserDecodedToken | UserData | undefined;
+	user: UserDecodedToken | undefined;
 	selected: 'home' | 'purchases' | 'favorites' | 'login';
 }
 

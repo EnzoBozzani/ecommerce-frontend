@@ -9,7 +9,7 @@ import { UserDecodedToken } from '@/src/utils/verifyToken';
 import { UserData } from '@/app/user/page';
 
 interface Props {
-	user: UserDecodedToken | UserData | undefined;
+	user: UserDecodedToken | undefined;
 	selectedPage: 'user' | 'purchases' | 'favorites';
 }
 
@@ -58,6 +58,9 @@ export const UserPagesHeader: FC<Props> = ({ user, selectedPage }) => {
 					<ConfirmModal
 						handleConfirm={handleConfirm}
 						setIsOpen={setIsModalOpen}
+						buttonColor='bg-red-500'
+						buttonText='Sair'
+						text='Deseja mesmo sair?'
 					/>
 				)}
 			</header>
@@ -177,6 +180,9 @@ export const UserPagesHeader: FC<Props> = ({ user, selectedPage }) => {
 				<ConfirmModal
 					handleConfirm={handleConfirm}
 					setIsOpen={setIsModalOpen}
+					buttonColor='bg-red-500'
+					buttonText='Sair'
+					text='Deseja mesmo sair?'
 				/>
 			)}
 		</header>
