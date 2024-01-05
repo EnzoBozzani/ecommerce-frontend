@@ -38,7 +38,7 @@ export const LoginDiv: FC = () => {
 
 		if (res.authenticated) {
 			localStorage.setItem('ecommerce-token', res.token);
-			router.push('/');
+			router.back();
 		}
 	};
 
