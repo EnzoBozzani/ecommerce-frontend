@@ -1,9 +1,9 @@
 'use client';
 
 import { FC, FormEvent, useState } from 'react';
-import { Button, InputGroup } from '..';
+import { Button, InputGroup, Toast } from '..';
 import { UserData } from '@/app/user/page';
-import { UserDecodedToken } from '@/src/utils/verifyToken';
+import { UsersService } from '@/src/services';
 
 interface Props {
 	user: UserData | undefined;
@@ -14,10 +14,40 @@ export const UpdateUserDataForm: FC<Props> = ({ user }) => {
 	const [lastName, setLastName] = useState(user!.lastName);
 	const [phone, setPhone] = useState(user!.phone);
 	const [email, setEmail] = useState(user!.email);
+	const [isToastOpen, setIsToastOpen] = useState(false);
+	const [toastMessage, setToastMessage] = useState('');
 
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
-		//...
+
+		const noFieldsChanged =
+			firstName === user!.firstName &&
+			lastName === user!.lastName &&
+			phone === user!.phone &&
+			email === user!.email;
+		if (noFieldsChanged) {
+			setToastMessage('Nenhum campo foi alterado!');
+			setIsToastOpen(true);
+			setTimeout(() => setIsToastOpen(false), 2000);
+			return;
+		}
+
+		const changedValues: any = {};
+		if (firstName !== user!.firstName) changedValues['firstName'] = firstName;
+		if (lastName !== user!.lastName) changedValues['lastName'] = lastName;
+		if (phone !== user!.phone) changedValues['phone'] = phone;
+		if (email !== user!.email) changedValues['email'] = email;
+
+		const res = await UsersService.updateUserData(changedValues);
+
+		if (res.message) {
+			setToastMessage('Algo deu errado :(');
+			setIsToastOpen(true);
+			setTimeout(() => setIsToastOpen(false), 2000);
+			return;
+		}
+
+		location.reload();
 	};
 
 	return (
@@ -63,6 +93,12 @@ export const UpdateUserDataForm: FC<Props> = ({ user }) => {
 				buttonText='Atualizar'
 				submit
 				style='lightMode'
+			/>
+			<Toast
+				isOpen={isToastOpen}
+				setIsOpen={setIsToastOpen}
+				text={toastMessage}
+				type='error'
 			/>
 		</form>
 	);

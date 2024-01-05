@@ -1,12 +1,16 @@
 'use client';
 
 import { FC, FormEvent, useState } from 'react';
-import { InputGroup, Button, ConfirmModal } from '..';
+import { InputGroup, Button, ConfirmModal, Toast } from '..';
+import { UsersService } from '@/src/services';
 
 export const UpdateUserPasswordForm: FC = () => {
 	const [password, setPassword] = useState('');
 	const [newPassword, setNewPassword] = useState('');
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isToastOpen, setIsToastOpen] = useState(false);
+	const [toastMessage, setToastMessage] = useState('');
+	const [toastType, setToastType] = useState<'success' | 'error'>('error');
 
 	const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
@@ -14,8 +18,31 @@ export const UpdateUserPasswordForm: FC = () => {
 	};
 
 	const handleConfirmSubmit = async () => {
-		//...
 		setIsModalOpen(false);
+		if (password === newPassword) {
+			setToastType('error');
+			setToastMessage('As senhas não podem ser iguais!');
+			setIsToastOpen(true);
+			setTimeout(() => setIsToastOpen(false), 2000);
+			return;
+		}
+
+		const res = await UsersService.updatePassword(newPassword, password);
+
+		if (res.message) {
+			setToastType('error');
+			setToastMessage(res.message);
+			setIsToastOpen(true);
+			setTimeout(() => setIsToastOpen(false), 2000);
+			return;
+		}
+
+		setToastType('success');
+		setToastMessage(res.message);
+		setIsToastOpen(true);
+		setTimeout(() => setIsToastOpen(false), 2000);
+		setNewPassword('');
+		setPassword('');
 	};
 
 	return (
@@ -54,6 +81,12 @@ export const UpdateUserPasswordForm: FC = () => {
 					text='Deseja mesmo atualizar?'
 				/>
 			)}
+			<Toast
+				isOpen={isToastOpen}
+				setIsOpen={setIsToastOpen}
+				text={toastMessage}
+				type={toastType}
+			/>
 		</form>
 	);
 };
