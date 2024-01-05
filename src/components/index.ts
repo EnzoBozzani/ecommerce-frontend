@@ -23,6 +23,7 @@ import { UserPagesHeader } from './public/UserPagesHeader';
 import { ConfirmModal } from './public/ConfirmModal';
 import { UpdateUserDataForm } from './public/UpdateUserDataForm';
 import { UpdateUserPasswordForm } from './public/UpdateUserPasswordForm';
+import { ProductArea } from './public/ProductArea';
 
 export {
 	InputGroup,
@@ -50,4 +51,5 @@ export {
 	ConfirmModal,
 	UpdateUserDataForm,
 	UpdateUserPasswordForm,
+	ProductArea,
 };
