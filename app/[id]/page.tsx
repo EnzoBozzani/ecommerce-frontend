@@ -1,7 +1,23 @@
 import Link from 'next/link';
 import { ProductArea } from '@/src/components';
+import { ProductsService } from '@/src/services';
 
-function ProductPage() {
+export interface Product {
+	id: number;
+	name: string;
+	description: string;
+	price: number;
+	images: [string | null, string | null, string | null];
+	num_favorites?: number;
+	in_stock: number;
+	featured: boolean;
+	createdAt?: Date;
+	updatedAt?: Date;
+}
+
+async function ProductPage({ params }: { params: { id: string } }) {
+	const product: Product = await ProductsService.getProductByID(+params.id);
+
 	return (
 		<main className='w-full min-h-screen bg-light'>
 			<header className='w-full bg-light border-b p-2 md:p-4 flex items-center justify-between border-b border-b-dark/20'>
@@ -46,7 +62,7 @@ function ProductPage() {
 					<p className='text-lg md:text-xl'>Usuário</p>
 				</Link>
 			</header>
-			<ProductArea />
+			<ProductArea product={product} />
 		</main>
 	);
 }
