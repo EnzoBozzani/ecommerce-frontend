@@ -105,7 +105,7 @@ export const Footer: FC<Props> = ({ user, selected }) => {
 	}
 
 	return (
-		<footer className='w-full border-t border-t-dark/20 py-4'>
+		<footer className='w-full border-t border-t-dark/20 py-4 fixed bottom-0 bg-light'>
 			<nav className='w-full flex justify-evenly items-center'>
 				<Link
 					href='/'

@@ -20,7 +20,7 @@ interface Props {
 
 export const ProductsSection: FC<Props> = ({ productsList, title, isLoading }) => {
 	return (
-		<section className='bg-light p-4 flex flex-col mx-auto max-w-[1600px]'>
+		<section className='bg-light p-4 mb-24 lg:mb-0 flex flex-col mx-auto max-w-[1600px]'>
 			<div className='flex flex-col gap-6 py-4 items-center'>
 				<h1 className='text-xl sm:text-2xl md:text-4xl lg:text-6xl text-dark mb-6'>Produtos {title}</h1>
 				{isLoading ? (
