@@ -1,6 +1,7 @@
 'use client';
 
-import { Footer, Loader, PurchaseCard, UserPagesHeader } from '@/src/components';
+import { Product } from '@/app/[id]/page';
+import { Footer, Loader, PurchaseCard, PurchaseSection, UserPagesHeader } from '@/src/components';
 import { UsersService } from '@/src/services';
 import { UserDecodedToken, verifyToken } from '@/src/utils/verifyToken';
 import { useRouter } from 'next/navigation';
@@ -19,6 +20,7 @@ export interface Purchase {
 	addressState: string;
 	addressCountry: string;
 	addressPostalCode: string;
+	Product: Product;
 }
 
 function UserPurchases() {
@@ -34,8 +36,8 @@ function UserPurchases() {
 			const decoded = verifyToken(token);
 			if (!decoded) return router.push('/login');
 			setUser(decoded);
-			const res: Purchase[] = await UsersService.getUserPurchases();
-			setPurchases(res);
+			const { purchases }: { purchases: Purchase[] } = await UsersService.getUserPurchases();
+			setPurchases(purchases);
 			setIsLoading(false);
 		};
 
@@ -55,19 +57,7 @@ function UserPurchases() {
 				selectedPage='purchases'
 				user={user}
 			/>
-			<section className='max-w-screen-lg mx-auto flex flex-col items-center gap-6'>
-				<h1 className='text-5xl'>Compras</h1>
-				{isLoading ? (
-					<Loader />
-				) : (
-					purchases?.map((purchase, i) => (
-						<PurchaseCard
-							key={i}
-							purchase={purchase}
-						/>
-					))
-				)}
-			</section>
+			{isLoading ? <Loader /> : <PurchaseSection purchases={purchases} />}
 			<Footer
 				selected='purchases'
 				user={user}

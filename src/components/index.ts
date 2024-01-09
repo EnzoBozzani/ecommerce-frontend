@@ -25,6 +25,7 @@ import { UpdateUserDataForm } from './public/UpdateUserDataForm';
 import { UpdateUserPasswordForm } from './public/UpdateUserPasswordForm';
 import { ProductArea } from './public/ProductArea';
 import { PurchaseCard } from './public/PurchaseCard';
+import { PurchaseSection } from './public/PurchaseSection';
 
 export {
 	InputGroup,
@@ -54,4 +55,5 @@ export {
 	UpdateUserPasswordForm,
 	ProductArea,
 	PurchaseCard,
+	PurchaseSection,
 };
