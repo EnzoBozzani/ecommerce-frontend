@@ -24,6 +24,7 @@ import { ConfirmModal } from './public/ConfirmModal';
 import { UpdateUserDataForm } from './public/UpdateUserDataForm';
 import { UpdateUserPasswordForm } from './public/UpdateUserPasswordForm';
 import { ProductArea } from './public/ProductArea';
+import { PurchaseCard } from './public/PurchaseCard';
 
 export {
 	InputGroup,
@@ -52,4 +53,5 @@ export {
 	UpdateUserDataForm,
 	UpdateUserPasswordForm,
 	ProductArea,
+	PurchaseCard,
 };

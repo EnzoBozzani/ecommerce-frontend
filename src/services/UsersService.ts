@@ -55,4 +55,20 @@ export default class UsersService {
 
 		return res.json();
 	}
+
+	static async getUserPurchases() {
+		const token = localStorage.getItem('ecommerce-token');
+
+		const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/users/current/purchases`, {
+			method: 'GET',
+			headers: {
+				//prettier-ignore
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		return res.json();
+	}
 }

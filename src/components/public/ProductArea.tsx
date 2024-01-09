@@ -3,6 +3,7 @@
 import { Product } from '@/app/[id]/page';
 import { FC, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Props {
 	product: Product | undefined;
@@ -100,9 +101,11 @@ export const ProductArea: FC<Props> = ({ product, width }) => {
 							})}
 						</h3>
 					</div>
-					<button className='w-full border rounded-xl px-4 py-6 bg-primaryLight text-light text-3xl'>
-						Comprar
-					</button>
+					<Link href={`/purchase/${product!.id}`}>
+						<button className='w-full border rounded-xl px-4 py-6 bg-primaryLight text-light text-3xl'>
+							Comprar
+						</button>
+					</Link>
 				</div>
 			</div>
 		</section>
