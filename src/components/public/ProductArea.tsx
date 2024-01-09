@@ -6,16 +6,18 @@ import Image from 'next/image';
 
 interface Props {
 	product: Product | undefined;
+	width: number;
 }
 
-export const ProductArea: FC<Props> = ({ product }) => {
+export const ProductArea: FC<Props> = ({ product, width }) => {
 	const [selectedImage, setSelectedImage] = useState(0);
 
 	return (
-		<section className='mx-auto max-w-screen-xl flex py-16 px-6'>
-			<div className='w-full lg:w-1/2 h-[500px]'>
-				<div className='h-full w-full flex flex-col  justify-center items-center'>
-					<div className='w-full flex items-center'>
+		<section className='mx-auto max-w-screen-xl flex flex-col lg:flex-row py-16 px-6'>
+			{width < 1024 && <h1 className='pb-12 text-4xl lg:text-5xl text-justify'>{product!.name}</h1>}
+			<div className='w-full lg:w-1/2 lg:h-[500px]'>
+				<div className='lg:h-full w-full flex flex-col gap-8 justify-center items-center'>
+					<div className='lg:w-full flex items-center'>
 						<button
 							onClick={() =>
 								setSelectedImage((prev) => (prev === 0 ? product!.images.length - 1 : prev - 1))
@@ -36,13 +38,15 @@ export const ProductArea: FC<Props> = ({ product }) => {
 								/>
 							</svg>
 						</button>
-						<Image
-							alt={`${product!.name} image ${selectedImage + 1}`}
-							src={`http://${product!.images[selectedImage]}`}
-							width={300}
-							height={300}
-							className='w-full h-auto'
-						/>
+						<div className='w-full flex justify-center items-center'>
+							<Image
+								alt={`${product!.name} image ${selectedImage + 1}`}
+								src={`http://${product!.images[selectedImage]}`}
+								width={400}
+								height={400}
+								className='max-h-[260px] max-w-[200px] sm:max-h-[520px] sm:max-w-[400px]'
+							/>
+						</div>
 						<button
 							onClick={() =>
 								setSelectedImage((prev) => (prev === product!.images.length - 1 ? 0 : prev + 1))
@@ -66,22 +70,29 @@ export const ProductArea: FC<Props> = ({ product }) => {
 					</div>
 					<div className='flex items-center gap-4'>
 						{product!.images.map((src, i) => (
-							<Image
-								key={i}
-								alt={`${product!.name} image ${i + 1}`}
-								src={`http://${src}`}
-								width={50}
-								height={50}
-							/>
+							<div
+								className={`w-[50px] h-[50px] flex justify-center items-center ${
+									i === selectedImage ? 'border-2 border-primaryLight' : ''
+								}`}
+							>
+								<Image
+									key={i}
+									alt={`${product!.name} image ${i + 1}`}
+									src={`http://${src}`}
+									width={50}
+									height={50}
+									onClick={() => setSelectedImage(i)}
+								/>
+							</div>
 						))}
 					</div>
 				</div>
 			</div>
-			<div className='ps-12 w-full lg:w-1/2 h-[500px] flex flex-col justify-between gap-4 py-24'>
-				<h1 className='text-5xl text-justify'>{product!.name}</h1>
-				<div className='w-full flex flex-col gap-8'>
+			<div className='sm:ps-12 w-full lg:w-1/2 lg:h-[500px] flex flex-col lg:justify-between gap-8 lg:gap-4 pb-20 pt-12 lg:py-24'>
+				{width >= 1024 && <h1 className='text-4xl lg:text-5xl text-justify'>{product!.name}</h1>}
+				<div className='w-full flex flex-col gap-4 lg:gap-8'>
 					<div className='rounded-xl border border-dark p-6 flex flex-col'>
-						<h3 className='text-4xl'>
+						<h3 className='text-3xl md:text-4xl'>
 							{product!.price.toLocaleString('pt-BR', {
 								style: 'currency',
 								currency: 'BRL',

@@ -127,7 +127,14 @@ function ProductPage({ params }: { params: { id: string } }) {
 					</div>
 				)}
 			</header>
-			{isLoading ? <Loader /> : <ProductArea product={product} />}
+			{isLoading ? (
+				<Loader />
+			) : (
+				<ProductArea
+					width={width}
+					product={product}
+				/>
+			)}
 			<Footer
 				selected='home'
 				user={user}
