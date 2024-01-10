@@ -103,7 +103,7 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 					cols={30}
 					rows={10}
 					minLength={1}
-					maxLength={100}
+					maxLength={255}
 					onChange={(ev) => setValue(ev.currentTarget.value)}
 					value={value}
 					className='resize-none px-1 py-2 border-2 border-primary bg-transparent text-light focus:outline-none focus:border-sec'
