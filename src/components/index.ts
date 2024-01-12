@@ -26,6 +26,7 @@ import { UpdateUserPasswordForm } from './public/UpdateUserPasswordForm';
 import { ProductArea } from './public/ProductArea';
 import { PurchaseCard } from './public/PurchaseCard';
 import { PurchaseSection } from './public/PurchaseSection';
+import { BuyProductForm } from './public/BuyProductForm';
 
 export {
 	InputGroup,
@@ -56,4 +57,5 @@ export {
 	ProductArea,
 	PurchaseCard,
 	PurchaseSection,
+	BuyProductForm,
 };
