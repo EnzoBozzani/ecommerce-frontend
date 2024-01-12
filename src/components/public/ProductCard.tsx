@@ -30,7 +30,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
 			<div className='h-full w-full flex flex-col'>
 				<div className='h-full flex flex-col gap-3 pt-6 xs:pt-12'>
 					<h3 className='text-lg sm:text-2xl'>
-						{width < 340 && product.name.length > 12 ? product.name.slice(0, 12) + '...' : product.name}
+						{width < 500 && product.name.length > 12 ? product.name.slice(0, 12) + '...' : product.name}
 					</h3>
 					<h2 className='text-dark/50 text-lg sm:text-2xl'>
 						{product.price.toLocaleString('pt-BR', {

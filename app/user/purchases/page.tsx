@@ -1,7 +1,7 @@
 'use client';
 
 import { Product } from '@/app/[id]/page';
-import { Footer, Loader, PurchaseCard, PurchaseSection, UserPagesHeader } from '@/src/components';
+import { Footer, Loader, PurchaseSection, UserPagesHeader } from '@/src/components';
 import { UsersService } from '@/src/services';
 import { UserDecodedToken, verifyToken } from '@/src/utils/verifyToken';
 import { useRouter } from 'next/navigation';
@@ -43,13 +43,6 @@ function UserPurchases() {
 
 		fetchPurchases();
 	}, []);
-
-	if (isLoading)
-		return (
-			<div className='w-full min-h-screen flex justify-center items-center bg-dark'>
-				<Loader />
-			</div>
-		);
 
 	return (
 		<main className='w-full min-h-screen bg-light flex flex-col'>

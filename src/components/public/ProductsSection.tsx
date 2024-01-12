@@ -7,9 +7,9 @@ import { Loader, ProductCard } from '..';
 
 export interface ProductsList {
 	products: Product[];
-	total: number;
-	perPage: number;
-	page: number;
+	total?: number;
+	perPage?: number;
+	page?: number;
 }
 
 interface Props {

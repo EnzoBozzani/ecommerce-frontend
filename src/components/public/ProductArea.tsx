@@ -32,13 +32,18 @@ export const ProductArea: FC<Props> = ({ product, width }) => {
 
 	const handleClickToFavoriteProduct = async () => {
 		setIsLoading(true);
-
+		if (isFavorited) {
+			await FavoritesService.deleteFavorite(+product!.id);
+		}
+		if (!isFavorited) {
+			await FavoritesService.saveFavorite(+product!.id);
+		}
 		location.reload();
 	};
 
 	if (isLoading)
 		return (
-			<div className='w-full min-h-screen flex justify-center items-center bg-dark'>
+			<div className='w-full min-h-screen flex justify-center items-center bg-light'>
 				<Loader />
 			</div>
 		);

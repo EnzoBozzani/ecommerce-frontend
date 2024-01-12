@@ -6,6 +6,7 @@ import { ProductsService } from '@/src/services';
 import { useEffect, useState } from 'react';
 import { UserDecodedToken, verifyToken } from '@/src/utils/verifyToken';
 import { useScreenWidth } from '@/src/hooks/useScreenWidth';
+import { useRouter } from 'next/navigation';
 
 export interface Product {
 	id: number;
@@ -21,6 +22,7 @@ export interface Product {
 }
 
 function ProductPage({ params }: { params: { id: string } }) {
+	const router = useRouter();
 	const [product, setProduct] = useState<Product>();
 	const [isLoading, setIsLoading] = useState(true);
 	const [user, setUser] = useState<UserDecodedToken>();
@@ -43,8 +45,8 @@ function ProductPage({ params }: { params: { id: string } }) {
 	return (
 		<main className='w-full min-h-screen bg-light'>
 			<header className='w-full bg-light border-b p-2 md:p-4 flex items-center justify-between border-b border-b-dark/20'>
-				<Link
-					href='/'
+				<button
+					onClick={() => router.back()}
 					className='flex items-center justify-center gap-2'
 				>
 					<svg
@@ -61,7 +63,7 @@ function ProductPage({ params }: { params: { id: string } }) {
 							d='M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3'
 						/>
 					</svg>
-				</Link>
+				</button>
 				{width >= 1024 && (
 					<div className='flex items-center gap-4'>
 						<Link href={!user ? '/login' : '/user/favorites'}>
