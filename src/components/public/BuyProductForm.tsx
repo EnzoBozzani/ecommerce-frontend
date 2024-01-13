@@ -110,7 +110,17 @@ export const BuyProductForm: FC = () => {
 					style='lightMode'
 				/>
 			</div>
-			{/* resto dos inputs */}
+			<div className='w-full'>
+				<InputGroup
+					inputType='text'
+					labelFor='addressPostalCode'
+					labelText='CEP: '
+					setValue={setAddressPostalCode}
+					value={addressPostalCode}
+					style='lightMode'
+					mask='cep'
+				/>
+			</div>
 			<Button
 				buttonText='Comprar'
 				submit

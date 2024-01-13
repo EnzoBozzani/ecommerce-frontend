@@ -1,10 +1,18 @@
 'use client';
 
 import { BuyProductForm } from '@/src/components';
+import { verifyToken } from '@/src/utils/verifyToken';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 function PurchaseProduct() {
 	const router = useRouter();
+	useEffect(() => {
+		const token = localStorage.getItem('ecommerce-token');
+		if (!token) return router.push('/login');
+		const decoded = verifyToken(token);
+		if (!decoded) return router.push('/login');
+	}, []);
 
 	return (
 		<main className='w-full min-h-screen bg-lightGray'>
