@@ -27,6 +27,7 @@ import { ProductArea } from './public/ProductArea';
 import { PurchaseCard } from './public/PurchaseCard';
 import { PurchaseSection } from './public/PurchaseSection';
 import { BuyProductForm } from './public/BuyProductForm';
+import { PaymentForm } from './public/PaymentForm';
 
 export {
 	InputGroup,
@@ -58,4 +59,5 @@ export {
 	PurchaseCard,
 	PurchaseSection,
 	BuyProductForm,
+	PaymentForm,
 };

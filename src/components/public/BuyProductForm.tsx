@@ -1,8 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { FC, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { Button, InputGroup, Logo } from '..';
+import {
+	CardCvcElement,
+	CardExpiryElement,
+	CardNumberElement,
+	PaymentElement,
+	useElements,
+	useStripe,
+} from '@stripe/react-stripe-js';
 
 const states = [
 	'AC',
@@ -40,13 +48,41 @@ export const BuyProductForm: FC = () => {
 	const [addressState, setAddressState] = useState('AC');
 	const [addressStreet, setAddressStreet] = useState('');
 	const [addressPostalCode, setAddressPostalCode] = useState('');
+	const stripe = useStripe();
+	const elements = useElements();
 
-	const handleSubmit = async () => {
-		//TODO: Função de verificação e envio dos dados
+	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
+		ev.preventDefault();
+
+		if (!stripe || !elements) {
+			// Stripe.js hasn't yet loaded.
+			// Make sure to disable form submission until Stripe.js has loaded.
+			return;
+		}
+
+		const result = await stripe.confirmPayment({
+			//`Elements` instance that was used to create the Payment Element
+			elements,
+			confirmParams: {
+				return_url: 'https://example.com/order/123/complete',
+			},
+		});
+
+		if (result.error) {
+			// Show error to your customer (for example, payment details incomplete)
+			console.log(result.error.message);
+		} else {
+			// Your customer will be redirected to your `return_url`. For some payment
+			// methods like iDEAL, your customer will be redirected to an intermediate
+			// site first to authorize the payment, then redirected to the `return_url`.
+		}
 	};
 
 	return (
-		<form className='mx-auto w-[95%] sm:w-[600px] bg-light shadow-lg rounded-2xl flex flex-col gap-8 px-6 sm:px-24 py-12'>
+		<form
+			onSubmit={handleSubmit}
+			className='mx-auto w-[95%] sm:w-[600px] bg-light shadow-lg rounded-2xl flex flex-col gap-8 px-6 sm:px-24 py-12'
+		>
 			<div className='w-full flex justify-center items-center'>
 				<Link href={'/'}>
 					<Logo className='w-16 h-16 text-primaryLight' />
@@ -68,8 +104,13 @@ export const BuyProductForm: FC = () => {
 						defaultValue={addressState}
 						onChange={(ev) => setAddressState(ev.currentTarget.value)}
 					>
-						{states.map((state) => (
-							<option value={state}>{state}</option>
+						{states.map((state, i) => (
+							<option
+								key={i}
+								value={state}
+							>
+								{state}
+							</option>
 						))}
 					</select>
 				</div>
@@ -121,6 +162,9 @@ export const BuyProductForm: FC = () => {
 					mask='cep'
 				/>
 			</div>
+			<CardNumberElement />
+			<CardExpiryElement />
+			<CardCvcElement />
 			<Button
 				buttonText='Comprar'
 				submit

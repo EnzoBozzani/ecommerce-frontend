@@ -1,6 +1,6 @@
 'use client';
 
-import { BuyProductForm } from '@/src/components';
+import { BuyProductForm, PaymentForm } from '@/src/components';
 import { verifyToken } from '@/src/utils/verifyToken';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -15,7 +15,7 @@ function PurchaseProduct() {
 	}, []);
 
 	return (
-		<main className='w-full min-h-screen bg-lightGray'>
+		<main className='w-full min-h-screen bg-lightGray pb-20'>
 			<div className='w-full p-4'>
 				<button onClick={() => router.back()}>
 					<svg
@@ -34,7 +34,7 @@ function PurchaseProduct() {
 					</svg>
 				</button>
 			</div>
-			<BuyProductForm />
+			<PaymentForm />
 		</main>
 	);
 }
