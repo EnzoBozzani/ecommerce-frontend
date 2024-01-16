@@ -2,15 +2,8 @@
 
 import Link from 'next/link';
 import { FC, FormEvent, useState } from 'react';
-import { Button, InputGroup, Logo } from '..';
-import {
-	CardCvcElement,
-	CardExpiryElement,
-	CardNumberElement,
-	PaymentElement,
-	useElements,
-	useStripe,
-} from '@stripe/react-stripe-js';
+import { Button, InputGroup, Loader, Logo } from '..';
+import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 const states = [
 	'AC',
@@ -51,20 +44,17 @@ export const BuyProductForm: FC = () => {
 	const stripe = useStripe();
 	const elements = useElements();
 
+	if (!stripe || !elements) {
+		return <Loader />;
+	}
+
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 
-		if (!stripe || !elements) {
-			// Stripe.js hasn't yet loaded.
-			// Make sure to disable form submission until Stripe.js has loaded.
-			return;
-		}
-
 		const result = await stripe.confirmPayment({
-			//`Elements` instance that was used to create the Payment Element
 			elements,
 			confirmParams: {
-				return_url: 'https://example.com/order/123/complete',
+				return_url: '',
 			},
 		});
 
@@ -162,7 +152,28 @@ export const BuyProductForm: FC = () => {
 					mask='cep'
 				/>
 			</div>
-			<CardNumberElement />
+			<div className='flex flex-col gap-2 w-full'>
+				<label
+					htmlFor='cardNumber'
+					className='text-dark font-semibold'
+				>
+					Número do cartão:
+				</label>
+				<CardNumberElement
+					id='cardNumber'
+					className='w-full px-1 py-2 border-[1.75px] border-dark/20 rounded-lg bg-black/5 focus:outline-none focus:border-primaryLight'
+					options={{
+						style: {
+							base: {
+								fontSize: '16px',
+								':focus': {
+									backgroundColor: '#fff',
+								},
+							},
+						},
+					}}
+				/>
+			</div>
 			<CardExpiryElement />
 			<CardCvcElement />
 			<Button

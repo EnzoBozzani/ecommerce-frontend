@@ -119,7 +119,13 @@ export const InputGroup: FC<Props> = ({ inputType, labelFor, value, setValue, la
 					minLength={1}
 					maxLength={40}
 					data-mask={
-						mask === 'phone' ? '[-]+55 (00) 00000-0000' : mask === 'date' ? 'dd/mm/yyyy' : '00000-000'
+						mask === 'phone'
+							? '[-]+55 (00) 00000-0000'
+							: mask === 'date'
+							? 'dd/mm/yyyy'
+							: mask === 'cep'
+							? '00000-000'
+							: ''
 					}
 				/>
 			)}
