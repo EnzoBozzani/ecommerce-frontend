@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { FC, FormEvent, useState } from 'react';
 import { Button, InputGroup, Loader, Logo } from '..';
-import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 const states = [
 	'AC',
@@ -51,21 +51,7 @@ export const BuyProductForm: FC = () => {
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 
-		const result = await stripe.confirmPayment({
-			elements,
-			confirmParams: {
-				return_url: '',
-			},
-		});
-
-		if (result.error) {
-			// Show error to your customer (for example, payment details incomplete)
-			console.log(result.error.message);
-		} else {
-			// Your customer will be redirected to your `return_url`. For some payment
-			// methods like iDEAL, your customer will be redirected to an intermediate
-			// site first to authorize the payment, then redirected to the `return_url`.
-		}
+		const result = await stripe.createToken(elements.getElement(CardElement)!);
 	};
 
 	return (
@@ -154,13 +140,13 @@ export const BuyProductForm: FC = () => {
 			</div>
 			<div className='flex flex-col gap-2 w-full'>
 				<label
-					htmlFor='cardNumber'
+					htmlFor='card'
 					className='text-dark font-semibold'
 				>
-					Número do cartão:
+					Dados:
 				</label>
-				<CardNumberElement
-					id='cardNumber'
+				<CardElement
+					id='card'
 					className='w-full px-1 py-2 border-[1.75px] border-dark/20 rounded-lg bg-black/5 focus:outline-none focus:border-primaryLight'
 					options={{
 						style: {
@@ -174,8 +160,6 @@ export const BuyProductForm: FC = () => {
 					}}
 				/>
 			</div>
-			<CardExpiryElement />
-			<CardCvcElement />
 			<Button
 				buttonText='Comprar'
 				submit
