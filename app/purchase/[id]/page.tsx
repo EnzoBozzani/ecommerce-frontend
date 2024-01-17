@@ -5,7 +5,7 @@ import { verifyToken } from '@/src/utils/verifyToken';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-function PurchaseProduct() {
+function PurchaseProduct({ params }: { params: { id: string } }) {
 	const router = useRouter();
 	useEffect(() => {
 		const token = localStorage.getItem('ecommerce-token');
@@ -34,7 +34,7 @@ function PurchaseProduct() {
 					</svg>
 				</button>
 			</div>
-			<PaymentForm />
+			<PaymentForm id={+params.id} />
 		</main>
 	);
 }

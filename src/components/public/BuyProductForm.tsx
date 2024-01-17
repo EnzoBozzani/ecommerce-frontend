@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { FC, FormEvent, useState } from 'react';
 import { Button, InputGroup, Loader, Logo } from '..';
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import PaymentService from '@/src/services/PaymentService';
 
 const states = [
 	'AC',
@@ -34,7 +35,7 @@ const states = [
 	'TO',
 ];
 
-export const BuyProductForm: FC = () => {
+export const BuyProductForm: FC<{ id: number }> = ({ id }: { id: number }) => {
 	const [addressCity, setAddressCity] = useState('');
 	const [addressNumber, setAddressNumber] = useState('');
 	const [addressComplement, setAddressComplement] = useState('');
@@ -51,7 +52,39 @@ export const BuyProductForm: FC = () => {
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 
-		const result = await stripe.createToken(elements.getElement(CardElement)!);
+		if (
+			addressCity === '' ||
+			addressNumber === '' ||
+			addressState === '' ||
+			addressStreet === '' ||
+			addressPostalCode === ''
+		) {
+			//TODO - Toast
+			return;
+		}
+
+		const { token, error } = await stripe.createToken(elements.getElement(CardNumberElement)!);
+
+		if (error) {
+			//TODO - Toast
+			return;
+		}
+
+		const res = await PaymentService.buyProduct({
+			addressCity,
+			addressNumber: +addressNumber,
+			addressCountry: 'Brasil',
+			addressPostalCode,
+			addressState,
+			addressStreet,
+			addressComplement,
+			productId: id,
+			stripeToken: token.id,
+		});
+
+		console.log(res);
+
+		//TODO - Toast de sucesso e redirecionar para compras
 	};
 
 	return (
@@ -140,13 +173,57 @@ export const BuyProductForm: FC = () => {
 			</div>
 			<div className='flex flex-col gap-2 w-full'>
 				<label
-					htmlFor='card'
+					htmlFor='cardNumber'
 					className='text-dark font-semibold'
 				>
-					Dados:
+					Número do cartão:
 				</label>
-				<CardElement
-					id='card'
+				<CardNumberElement
+					id='cardNumber'
+					className='w-full px-1 py-2 border-[1.75px] border-dark/20 rounded-lg bg-black/5 focus:outline-none focus:border-primaryLight'
+					options={{
+						style: {
+							base: {
+								fontSize: '16px',
+								':focus': {
+									backgroundColor: '#fff',
+								},
+							},
+						},
+					}}
+				/>
+			</div>
+			<div className='flex flex-col gap-2 w-full'>
+				<label
+					htmlFor='cardExpiry'
+					className='text-dark font-semibold'
+				>
+					Expiração:
+				</label>
+				<CardExpiryElement
+					id='cardExpiry'
+					className='w-full px-1 py-2 border-[1.75px] border-dark/20 rounded-lg bg-black/5 focus:outline-none focus:border-primaryLight'
+					options={{
+						style: {
+							base: {
+								fontSize: '16px',
+								':focus': {
+									backgroundColor: '#fff',
+								},
+							},
+						},
+					}}
+				/>
+			</div>
+			<div className='flex flex-col gap-2 w-full'>
+				<label
+					htmlFor='cardCvc'
+					className='text-dark font-semibold'
+				>
+					CVC:
+				</label>
+				<CardCvcElement
+					id='cardCvc'
 					className='w-full px-1 py-2 border-[1.75px] border-dark/20 rounded-lg bg-black/5 focus:outline-none focus:border-primaryLight'
 					options={{
 						style: {

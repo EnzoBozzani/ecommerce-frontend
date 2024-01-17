@@ -1,3 +1,5 @@
+import { Token } from '@stripe/stripe-js';
+
 interface PurchaseParams {
 	addressComplement?: string;
 	addressNumber: number;
@@ -6,7 +8,7 @@ interface PurchaseParams {
 	addressState: string;
 	addressCountry: string;
 	addressPostalCode: string;
-	token: string;
+	stripeToken: string;
 	productId: number;
 }
 
