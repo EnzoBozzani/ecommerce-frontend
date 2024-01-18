@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import { FC, FormEvent, useState } from 'react';
-import { Button, InputGroup, Loader, Logo } from '..';
+import { Button, InputGroup, Loader, Logo, Toast } from '..';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import PaymentService from '@/src/services/PaymentService';
+import { useRouter } from 'next/navigation';
 
 const states = [
 	'AC',
@@ -36,12 +37,15 @@ const states = [
 ];
 
 export const BuyProductForm: FC<{ id: number }> = ({ id }: { id: number }) => {
+	const router = useRouter();
 	const [addressCity, setAddressCity] = useState('');
 	const [addressNumber, setAddressNumber] = useState('');
 	const [addressComplement, setAddressComplement] = useState('');
 	const [addressState, setAddressState] = useState('AC');
 	const [addressStreet, setAddressStreet] = useState('');
 	const [addressPostalCode, setAddressPostalCode] = useState('');
+	const [toastErrorMessage, setToastErrorMessage] = useState('');
+	const [isToastOpen, setIsToastOpen] = useState(false);
 	const stripe = useStripe();
 	const elements = useElements();
 
@@ -59,18 +63,26 @@ export const BuyProductForm: FC<{ id: number }> = ({ id }: { id: number }) => {
 			addressStreet === '' ||
 			addressPostalCode === ''
 		) {
-			//TODO - Toast
+			setToastErrorMessage('Preencha todos os campos obrigatórios!');
+			setIsToastOpen(true);
+			setTimeout(() => {
+				setIsToastOpen(false);
+			}, 2 * 1000);
 			return;
 		}
 
 		const { token, error } = await stripe.createToken(elements.getElement(CardNumberElement)!);
 
 		if (error) {
-			//TODO - Toast
+			setToastErrorMessage('Erro ao validar o pagamento!');
+			setIsToastOpen(true);
+			setTimeout(() => {
+				setIsToastOpen(false);
+			}, 2 * 1000);
 			return;
 		}
 
-		const res = await PaymentService.buyProduct({
+		await PaymentService.buyProduct({
 			addressCity,
 			addressNumber: +addressNumber,
 			addressCountry: 'Brasil',
@@ -82,9 +94,7 @@ export const BuyProductForm: FC<{ id: number }> = ({ id }: { id: number }) => {
 			stripeToken: token.id,
 		});
 
-		console.log(res);
-
-		//TODO - Toast de sucesso e redirecionar para compras
+		router.push('/user/purchases');
 	};
 
 	return (
@@ -243,6 +253,12 @@ export const BuyProductForm: FC<{ id: number }> = ({ id }: { id: number }) => {
 				style='lightMode'
 			/>
 			<p className='text-dark/40'>*: campo opcional</p>
+			<Toast
+				isOpen={isToastOpen}
+				setIsOpen={setIsToastOpen}
+				text={toastErrorMessage}
+				type='error'
+			/>
 		</form>
 	);
 };
