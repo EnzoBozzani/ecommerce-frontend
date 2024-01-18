@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>Ecommerce Platform Frontend</h1>
 
-## Getting Started
+> Project Status: Finished (January 17, 2024)
 
-First, run the development server:
+### Topics
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+:small_blue_diamond: [Project Description](#project-description)
+
+:small_blue_diamond: [Features](#features)
+
+:small_blue_diamond: [Dependencies](#dependencies)
+
+:small_blue_diamond: [Run App](#run-application)
+
+## Project Description
+
+<p align="justify">
+  The Ecommerce Platform Frontend is a user-centric solution that encompasses all essential features of an online store. It boasts a streamlined product discovery experience with powerful search and filters, ensuring customers easily find what they need. From detailed product views to secure user authentication, the frontend is designed for intuitive navigation, helping users make informed purchase decisions. The seamless shopping experience includes a responsive design for accessibility across devices, and Stripe integration guarantees secure transactions during the checkout process. On the administrative side, the robust dashboard empowers administrators with tools for comprehensive order management, product oversight, and insightful data analysis. It's a cohesive platform that seamlessly combines user-friendly elements for customers and efficient management features for administrators, creating a well-rounded Ecommerce solution.
+</p>
+
+## Features
+
+:heavy_check_mark: Login and register, searching for products, buying products, saving products. Admin Panel: view users, products and purchases tables, edit, delete and create products.
+
+## Dependencies
+
+:warning: Node
+<br>
+:warning: TypeScript
+<br>
+:warning: NextJS
+<br>
+:warning: ReactJS
+<br>
+:warning: Tailwind
+
+## Run application:
+
+Clone project:
+
+```
+git clone https://github.com/EnzoBozzani/ecommerce-frontend.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Run project:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+npm run dev
+```
