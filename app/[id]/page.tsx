@@ -40,11 +40,11 @@ function ProductPage({ params }: { params: { id: string } }) {
 			setIsLoading(false);
 		};
 		fetchProduct();
-	}, []);
+	}, [params.id]);
 
 	return (
 		<main className='w-full min-h-screen bg-light'>
-			<header className='w-full bg-light border-b p-2 md:p-4 flex items-center justify-between border-b border-b-dark/20'>
+			<header className='w-full bg-light border-b p-2 md:p-4 flex items-center justify-between border-b-dark/20'>
 				<button
 					onClick={() => router.back()}
 					className='flex items-center justify-center gap-2'

@@ -43,7 +43,7 @@ export const HeroSection: FC<Props> = ({ setProductsList, setIsLoading, setTitle
 				products,
 			};
 		});
-	}, [order, param]);
+	}, [order, param, setProductsList]);
 
 	return (
 		<section className='bg-light flex flex-col mx-auto max-w-[1600px]'>

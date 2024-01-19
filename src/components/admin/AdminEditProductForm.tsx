@@ -26,7 +26,7 @@ export const AdminEditProductForm: FC<Props> = ({ product }) => {
 	useEffect(() => {
 		const token = localStorage.getItem('ecommerce-admin-token');
 		if (!token || !verifyToken(token)) router.push('/admin/login');
-	}, []);
+	}, [router]);
 
 	const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();

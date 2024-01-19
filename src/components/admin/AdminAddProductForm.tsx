@@ -23,7 +23,7 @@ export const AdminAddProductForm: FC = () => {
 		const token = localStorage.getItem('ecommerce-admin-token');
 		if (!token || !verifyToken(token)) router.push('/admin/login');
 		setIsLoading(false);
-	}, []);
+	}, [router]);
 
 	if (isLoading) return <Loader />;
 

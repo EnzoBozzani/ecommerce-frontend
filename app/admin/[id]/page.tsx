@@ -41,7 +41,7 @@ function AdminEditProduct({ params }: Params) {
 			setIsLoading(false);
 		};
 		fetchProduct();
-	}, []);
+	}, [id, router]);
 
 	if (isLoading) return <Loader />;
 

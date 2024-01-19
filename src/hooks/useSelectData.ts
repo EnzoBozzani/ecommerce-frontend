@@ -73,7 +73,7 @@ export const useSelectData = () => {
 		};
 
 		fetchUsers();
-	}, [selected]);
+	}, [selected, router]);
 
 	return {
 		selected,

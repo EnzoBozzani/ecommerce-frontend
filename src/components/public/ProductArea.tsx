@@ -28,7 +28,7 @@ export const ProductArea: FC<Props> = ({ product, width }) => {
 			setIsLoading(false);
 		};
 		fetchIsFavorited();
-	}, []);
+	}, [product]);
 
 	const handleClickToFavoriteProduct = async () => {
 		setIsLoading(true);

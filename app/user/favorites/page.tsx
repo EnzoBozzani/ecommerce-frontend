@@ -25,7 +25,7 @@ function UserFavorites() {
 			setIsLoading(false);
 		};
 		fetchFavoritedProducts();
-	}, []);
+	}, [router]);
 
 	return (
 		<main className='w-full min-h-screen bg-light flex flex-col'>

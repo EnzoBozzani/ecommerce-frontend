@@ -42,7 +42,7 @@ function UserPurchases() {
 		};
 
 		fetchPurchases();
-	}, []);
+	}, [router]);
 
 	return (
 		<main className='w-full min-h-screen bg-light flex flex-col'>

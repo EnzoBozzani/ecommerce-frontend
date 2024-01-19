@@ -37,7 +37,7 @@ function UserData() {
 		};
 
 		fetchUser();
-	}, []);
+	}, [router]);
 
 	if (isLoading)
 		return (

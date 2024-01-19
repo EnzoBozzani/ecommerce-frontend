@@ -18,7 +18,7 @@ export const AdminLoginDiv: FC = () => {
 	useEffect(() => {
 		const token = localStorage.getItem('ecommerce-admin-token');
 		if (token && verifyToken(token)) router.push('/admin');
-	}, []);
+	}, [router]);
 
 	const handleClick = async () => {
 		if (email === '' || password === '') {
@@ -45,7 +45,7 @@ export const AdminLoginDiv: FC = () => {
 	};
 
 	return (
-		<div className='bg-black w-11/12 md:w-[48rem] md:h-[32rem] bg-dark flex flex-col gap-2 md:flex-row'>
+		<div className='bg-black w-11/12 md:w-[48rem] md:h-[32rem] flex flex-col gap-2 md:flex-row'>
 			<div className='flex justify-center items-center bg-primary md:w-1/3 p-12'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'

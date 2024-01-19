@@ -6,7 +6,10 @@ export const HeroSectionCarousel: FC = () => {
 	const [selected, setSelected] = useState(0);
 
 	const carouselItems = [
-		<div className='bg-primary py-12 flex flex-col items-center justify-center gap-4 min-h-[300px]'>
+		<div
+			key={0}
+			className='bg-primary py-12 flex flex-col items-center justify-center gap-4 min-h-[300px]'
+		>
 			<h1 className='text-light text-2xl sm:text-4xl font-bold text-center w-11/12 md:w-2/3'>
 				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, repellat.
 			</h1>
@@ -18,12 +21,18 @@ export const HeroSectionCarousel: FC = () => {
 				<span className='text-gradient font-bold uppercase'>Lorem ipsum</span>
 			</button>
 		</div>,
-		<div className='bg-gradient-to-r from-primaryLight to-sec py-12 flex flex-col items-center justify-center gap-4 min-h-[300px]'>
+		<div
+			key={1}
+			className='bg-gradient-to-r from-primaryLight to-sec py-12 flex flex-col items-center justify-center gap-4 min-h-[300px]'
+		>
 			<h1 className='text-light text-2xl sm:text-4xl font-bold text-center w-11/12 md:w-2/3'>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, iste?
 			</h1>
 		</div>,
-		<div className='bg-sec py-12 flex flex-col items-center justify-center gap-4 min-h-[300px]'>
+		<div
+			key={2}
+			className='bg-sec py-12 flex flex-col items-center justify-center gap-4 min-h-[300px]'
+		>
 			<h1 className='text-light text-2xl sm:text-4xl font-bold text-center w-11/12 md:w-2/3'>
 				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, repellat.
 			</h1>

@@ -12,7 +12,7 @@ function PurchaseProduct({ params }: { params: { id: string } }) {
 		if (!token) return router.push('/login');
 		const decoded = verifyToken(token);
 		if (!decoded) return router.push('/login');
-	}, []);
+	}, [router]);
 
 	return (
 		<main className='w-full min-h-screen bg-lightGray pb-20'>
